@@ -98,5 +98,4 @@ class CategoriesController extends CommonsController
         $this->categoryRepository->deleteItem($id);
         CommonsController::redirectWithAction('CategoriesController', 'index');
     }
-
 }

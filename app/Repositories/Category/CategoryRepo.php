@@ -10,4 +10,5 @@ class CategoryRepo extends AbstractEloquentRepository implements CategoryRepoInt
     {
         $this->model = $category;
     }
+
 }

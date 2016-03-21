@@ -27,7 +27,6 @@ class CommonsController extends Controller
         $this->input = Input::get();
         //set locale for user
         $lang = Cookie::get('lang') ? Cookie::get('lang') : 'vi';
-
         App::setLocale($lang);
         //ToDo : we will set $viewFolder in child classes
     }
