@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('category', 'CategoriesController');
+Route::get('change-lang/{iso_code}', 'CommonsController@setLanguage');
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
