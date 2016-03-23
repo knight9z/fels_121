@@ -28,7 +28,7 @@ class SessionLoginRequest extends Request
 
         return [
                 'email' => 'required|email',
-                'password' => 'required|between:' . $userConfig['password_min_length'] . ',' . $userConfig['password_min_length'],
+                'password' => 'required|between:' . $userConfig['password_min_length'] . ',' . $userConfig['password_max_length'],
         ];
     }
 

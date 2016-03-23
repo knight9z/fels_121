@@ -30,7 +30,6 @@ Route::get('change-lang/{iso_code}', 'CommonsController@setLanguage');
 
 Route::group(['middleware' => ['web']], function () {
     // Authentication routes...
-
     Route::get('auth/login', 'SessionController@getLogin');
     Route::post('auth/login', 'SessionController@postLogin');
 
@@ -42,8 +41,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('auth/register', 'SessionController@postRegister');
 
     // Router of admin
-    Route::group(['middleware' => ['auth', 'role:' . \App\Http\Controllers\SessionController::USER_ROLE_ADMIN]], function () {
-
+    Route::group(['middleware' => ['auth', 'role:1'] ], function () {
+        Route::get('admin/dashboard', 'AdminController@index');
     });
 
     // Router of customer
