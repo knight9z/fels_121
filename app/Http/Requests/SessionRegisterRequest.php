@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
 class SessionRegisterRequest extends Request
 {
     /**
@@ -24,11 +22,10 @@ class SessionRegisterRequest extends Request
     public function rules()
     {
         $userConfig = config('constants.user');
-
         return [
             'email' => 'required|email',
             'name' => 'required',
-            'password' => 'required|between:' . $userConfig['password_min_length'] . ',' . $userConfig['password_min_length'],
+            'password' => 'required|between:' . $userConfig['password_min_length'] . ',' . $userConfig['password_max_length'] .'',
             'image' => 'required|mimes:jpeg,png',
             'password_repeat' => 'required'
         ];

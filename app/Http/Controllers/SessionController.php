@@ -28,11 +28,9 @@ class SessionController extends Controller
     public function __construct(UserRepoInterface $user)
     {
         $this->useRepo = $user;
-
         //set locale for user
         $lang = Cookie::get('lang') ? Cookie::get('lang') : 'vi';
         App::setLocale($lang);
-
     }
 
     /**
@@ -54,7 +52,6 @@ class SessionController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getLogin() {
-
         $this->_checkLogin();
 
         return view('session.login');
@@ -67,12 +64,10 @@ class SessionController extends Controller
      */
     public function postLogin(SessionLoginRequest $request) {
         $input = $request->only('email', 'password');
-
-        // check
         if (Auth::attempt($input)) {
             $this->_checkLogin();
-
         }
+
         return view('session.login', ['messages' => trans('user.login.login_failed')]);
     }
 
@@ -95,7 +90,6 @@ class SessionController extends Controller
         $this->_checkLogin();
 
         return view('session.register');
-
     }
 
     /**
@@ -106,12 +100,10 @@ class SessionController extends Controller
     public function postRegister (SessionRegisterRequest $request)
     {
         $this->_checkLogin();
-
         $responseFromRepo = $this->useRepo->createItem($request->all());
-
         if($responseFromRepo['error']){
             return redirect()->action('SessionController@getRegister')
-                             ->withErrors([trans('user.register.compare_password')])
+                             ->withErrors([$responseFromRepo['message']])
                              ->withInput($request->all());
 
         } else {
@@ -122,8 +114,4 @@ class SessionController extends Controller
         }
 
     }
-
-
-
-
 }
