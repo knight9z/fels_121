@@ -29,5 +29,17 @@ Route::get('change-lang/{iso_code}', 'CommonsController@setLanguage');
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+    // Authentication routes...
+
+    Route::get('auth/login', 'SessionController@getLogin');
+    Route::post('auth/login', 'SessionController@postLogin');
+
+    //logout
+    Route::get('auth/logout', 'SessionController@logOut');
+
+    // Registration routes...
+    Route::get('auth/register', 'SessionController@getRegister');
+    Route::post('auth/register', 'SessionController@postRegister');
+
+
 });
