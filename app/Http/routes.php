@@ -41,5 +41,14 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('auth/register', 'SessionController@getRegister');
     Route::post('auth/register', 'SessionController@postRegister');
 
+    // Router of admin
+    Route::group(['middleware' => ['auth', 'role:' . \App\Http\Controllers\SessionController::USER_ROLE_ADMIN]], function () {
+
+    });
+
+    // Router of customer
+    Route::group(['middleware' => ['auth', 'role:' . \App\Http\Controllers\SessionController::USER_ROLE_CLIENT]], function () {
+
+    });
 
 });
