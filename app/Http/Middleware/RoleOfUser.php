@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Log;
 
 class RoleOfUser
 {
@@ -17,8 +16,7 @@ class RoleOfUser
      */
     public function handle($request, Closure $next, $role)
     {
-
-        if ($request->user()->role != $role) {
+        if (!isset($request->user()->role) || $request->user()->role != $role) {
             return redirect()->action('SessionController@getLogin');
         }
 

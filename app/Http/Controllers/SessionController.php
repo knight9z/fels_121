@@ -39,7 +39,9 @@ class SessionController extends Controller
      */
     protected function _checkLogin () {
         if (Auth::user()) {
+
             if (Auth::user()->role == $this::USER_ROLE_ADMIN) {
+
                 return redirect()->action('AdminController@index');
             }
 
@@ -64,11 +66,20 @@ class SessionController extends Controller
      */
     public function postLogin(SessionLoginRequest $request) {
         $input = $request->only('email', 'password');
+
+
         if (Auth::attempt($input)) {
-            $this->_checkLogin();
+            if (Auth::user()->role == $this::USER_ROLE_ADMIN) {
+
+                return redirect()->action('AdminController@index');
+            }
+
+            return redirect()->action('ClientController@index');
         }
 
-        return view('session.login', ['messages' => trans('user.login.login_failed')]);
+        return redirect()->action('SessionController@getLogin')
+                            ->withErrors([trans('user.login.login_failed')])
+                            ->withInput($request->all());
     }
 
     /**

@@ -1,7 +1,6 @@
 <?php
-namespace App\Http\Controllers;
 
-use App\Http\Requests;
+namespace App\Http\Controllers;
 
 class AdminController extends CommonsController
 {
@@ -13,6 +12,6 @@ class AdminController extends CommonsController
 
     public function index ()
     {
-        $this->_renderView('index');
+        return $this->_renderView('index');
     }
 }

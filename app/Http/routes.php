@@ -40,14 +40,16 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('auth/register', 'SessionController@getRegister');
     Route::post('auth/register', 'SessionController@postRegister');
 
-    // Router of admin
-    Route::group(['middleware' => ['auth', 'role:1'] ], function () {
-        Route::get('admin/dashboard', 'AdminController@index');
-    });
+    //Route::get('abcd', 'AdminController@index');
 
     // Router of customer
     Route::group(['middleware' => ['auth', 'role:' . \App\Http\Controllers\SessionController::USER_ROLE_CLIENT]], function () {
 
     });
 
+});
+
+// Router of admin
+Route::group(['prefix' => '/admin', 'middleware' => ['web', 'role:1' ]], function () {
+    Route::get('abcd', 'AdminController@index');
 });
