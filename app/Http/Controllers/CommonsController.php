@@ -79,31 +79,6 @@ class CommonsController extends Controller
     }
 
     /**
-     * upload file to server
-     * @param $request
-     * @param string $preFix
-     * @return array
-     */
-    protected function _uploadImage ($request, $preFix = 'cat' )
-    {
-        if(!empty($request->file('images'))){
-            $path = public_path('uploads/' . $preFix);
-            $imageData = $request->file('image');
-            $imageName = $preFix . "_" . time() . "_" . $imageData->getClientOriginalExtension();
-            $image = $imageData->move($path, $imageName);
-
-            if (empty($image)) {
-                return ['error' => true, 'message' => trans('file.uploads.move_fail')];
-
-            }
-
-            return ['error' => false, 'data' => $image];
-        }
-
-        return ['error' => true, 'message' => trans('file.uploads.file_empty')];
-    }
-
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

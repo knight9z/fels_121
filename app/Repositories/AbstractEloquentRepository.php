@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 /**
  * Created by PhpStorm.
@@ -12,6 +13,31 @@ use Illuminate\Support\Facades\DB;
 abstract class AbstractEloquentRepository {
 
     protected $model;
+
+    /**
+     * upload image
+     * @param string $preFix
+     * @param string $field
+     * @return array
+     */
+    protected function _uploadImage ($preFix = 'cat', $field = 'image' )
+    {
+        if(!empty(Input::file($field))){
+            $path = public_path('uploads/');
+            $imageData = Input::file($field);
+            $imageName = $preFix . "_" . time() . "_" . $imageData->getClientOriginalExtension();
+            $image = $imageData->move($path, $imageName);
+
+            if (empty($image)) {
+                return ['error' => true, 'message' => trans('file.uploads.move_fail')];
+
+            }
+
+            return ['error' => false, 'data' => $imageName];
+        }
+
+        return ['error' => true, 'message' => trans('file.uploads.file_empty')];
+    }
 
     /**
      * @param $filter
@@ -100,7 +126,7 @@ abstract class AbstractEloquentRepository {
     /**
      * @param $id
      * @return mixed
-     * @throws Exception
+     * @throws \Exception
      */
     public function deleteItem ($id)
     {
@@ -122,5 +148,7 @@ abstract class AbstractEloquentRepository {
             //TODO : we wil process in handle exception.
         }
     }
+
+
 
 }

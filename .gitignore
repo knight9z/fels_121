@@ -14,3 +14,4 @@ storage/
 .env.example
 .idea/workspace.xml
 .idea/
+app/public/uploads
