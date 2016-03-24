@@ -8,7 +8,7 @@
  */
 namespace App\Repositories\User;
 
-interface UserRepoInterface
+interface UserRepositoryInterface
 {
     public function getAllWithPage ($filter, $perPage);
     public function getDetail ($id);

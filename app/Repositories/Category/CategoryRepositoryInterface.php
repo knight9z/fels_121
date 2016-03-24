@@ -1,7 +1,7 @@
 <?php
 namespace App\Repositories\Category;
 
-interface CategoryRepoInterface {
+interface CategoryRepositoryInterface {
     public function getAllWithPage ($filter, $perPage);
     public function getDetail ($id);
     public function updateItem ($id, $rawData);

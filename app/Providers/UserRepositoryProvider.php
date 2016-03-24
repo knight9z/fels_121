@@ -2,11 +2,11 @@
 
 namespace App\Providers;
 
-use App\Repositories\Category\CategoryRepo;
-use App\Repositories\Category\CategoryRepoInterface;
+use App\Repositories\User\UserRepository;
+use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
-class CategoryRepoServiceProvider extends ServiceProvider
+class UserRepositoryProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -26,8 +26,8 @@ class CategoryRepoServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            CategoryRepoInterface::class,
-            CategoryRepo::class
+            UserRepositoryInterface::class,
+            UserRepository::class
         );
     }
 }

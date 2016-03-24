@@ -2,9 +2,9 @@
 namespace App\Repositories\Category;
 
 use App\Category;
-use App\Repositories\AbstractEloquentRepository;
+use App\Repositories\EloquentRepository;
 
-class CategoryRepo extends AbstractEloquentRepository implements CategoryRepoInterface
+class CategoryRepository extends EloquentRepository implements CategoryRepositoryInterface
 {
     public function __construct(Category $category)
     {

@@ -43,14 +43,14 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('member/register', 'SessionController@postRegister');
 
     // Router of admin
-    Route::group(['prefix' => '/admin', 'middleware' => ['admin' ]], function () {
+    Route::group(['prefix' => '/admin', 'middleware' => ['admin']], function () {
         Route::get('dashboard', 'AdminController@index');
     });
 
 
     // Router of customer
     Route::group(['prefix' => '/member', 'middleware' => ['user']], function () {
-        Route::get('dashboard', 'AdminController@index');
+        //Route::get('dashboard', 'AdminController@index');
     });
 
 });

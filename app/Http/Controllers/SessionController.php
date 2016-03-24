@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SessionLoginRequest;
 use App\Http\Requests;
 use App\Http\Requests\SessionRegisterRequest;
-use App\Repositories\User\UserRepoInterface;
+use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
@@ -21,9 +21,9 @@ class SessionController extends Controller
 
     /**
      * SessionController constructor.
-     * @param UserRepoInterface $user
+     * @param UserRepositoryInterface $user
      */
-    public function __construct(UserRepoInterface $user)
+    public function __construct(UserRepositoryInterface $user)
     {
         $this->userRepository = $user;
         //set locale for user

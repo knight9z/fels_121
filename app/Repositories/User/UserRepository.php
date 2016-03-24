@@ -1,12 +1,11 @@
 <?php
 namespace App\Repositories\User;
 
-use App\Http\Controllers\SessionController;
 use App\User;
-use App\Repositories\AbstractEloquentRepository;
+use App\Repositories\EloquentRepository;
 use Illuminate\Support\Facades\Hash;
 
-class UserRepo extends AbstractEloquentRepository implements UserRepoInterface
+class UserRepository extends EloquentRepository implements UserRepositoryInterface
 {
     public function __construct(User $user)
     {
