@@ -28,6 +28,38 @@ class User extends Authenticatable
     ];
 
     /**
+     * allowed filter field
+     *
+     * @var array
+     */
+    protected $filterFields = ['id', 'email', 'name', 'role'];
+
+
+    /**
+     * build query
+     * @param array $fields
+     * @param array $filter
+     * @param string $orderBy
+     * @return mixed
+     */
+    protected function _queryBuild ($fields = ['*'], $filter = [], $orderBy = 'id')
+    {
+        $query = $this::select($fields);
+
+        foreach ($this->filterFields as $field) {
+            if (isset($filter[$field])) {
+                $query = $query->where($field, $filter[$field]);
+
+            }
+        }
+
+        $query = $query->orderBy($orderBy);
+
+        return $query;
+    }
+
+
+    /**
      * check email
      * @param $mailName
      * @return mixed
@@ -51,5 +83,11 @@ class User extends Authenticatable
     public function isUser ()
     {
         return $this->role == self::USER_ROLE_USER;
+    }
+
+    public function getAllWithPage ($filter, $fields = ['*'], $perPage = 15)
+    {
+        $query = $this->_queryBuild($fields = ['*'] , $filter);
+        return $query->paginate($perPage);
     }
 }

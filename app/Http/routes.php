@@ -45,6 +45,7 @@ Route::group(['middleware' => ['web']], function () {
     // Router of admin
     Route::group(['prefix' => '/admin', 'middleware' => ['admin']], function () {
         Route::get('dashboard', 'AdminController@index');
+        Route::get('user', 'UsersController@index');
     });
 
 

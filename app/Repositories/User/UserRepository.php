@@ -62,4 +62,5 @@ class UserRepository extends EloquentRepository implements UserRepositoryInterfa
     {
         return $this->model->isUser();
     }
+
 }

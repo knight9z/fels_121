@@ -5,7 +5,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Category</h1>
+                <h1 class="page-header">User</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -18,60 +18,31 @@
                             <table class="table table-striped  table-hover" >
                                 <thead>
                                 <tr>
-                                    <th>Id</th>
+                                    <th>ID</th>
                                     <th>Image</th>
-                                    <th>Title</th>
-                                    <th>Summary</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="odd gradeX">
-                                    <td>Trident</td>
-                                    <td>Internet Explorer 4.0</td>
-                                    <td>Win 95+</td>
-                                    <td class="center">4</td>
-                                    <td class="center">X</td>
-                                </tr>
-                                <tr class="even gradeC">
-                                    <td>Trident</td>
-                                    <td>Internet Explorer 5.0</td>
-                                    <td>Win 95+</td>
-                                    <td class="center">5</td>
-                                    <td class="center">C</td>
-                                </tr>
-                                <tr class="odd gradeA">
-                                    <td>Trident</td>
-                                    <td>Internet Explorer 5.5</td>
-                                    <td>Win 95+</td>
-                                    <td class="center">5.5</td>
-                                    <td class="center">A</td>
-                                </tr>
-                                <tr class="even gradeA">
-                                    <td>Trident</td>
-                                    <td>Internet Explorer 6</td>
-                                    <td>Win 98+</td>
-                                    <td class="center">6</td>
-                                    <td class="center">A</td>
-                                </tr>
-                                <tr class="odd gradeA">
-                                    <td>Trident</td>
-                                    <td>Internet Explorer 7</td>
-                                    <td>Win XP SP2+</td>
-                                    <td class="center">7</td>
-                                    <td class="center">A</td>
-                                </tr>
-                                <tr class="even gradeA">
-                                    <td>Trident</td>
-                                    <td>AOL browser (AOL desktop)</td>
-                                    <td>Win XP</td>
-                                    <td class="center">6</td>
-                                    <td class="center">A</td>
-                                </tr>
+                                <?php//  var_dump($data);die; ?>
+                                @foreach($data as $value)
+                                    <tr class="odd gradeX">
+                                        <td class="center"> {!! $value['id'] !!} </td>
+                                        <td class="center"> {!! $value['avatar'] !!} </td>
+                                        <td class="center"> {!! $value['name'] !!} </td>
+                                        <td class="center"> {!! $value['email'] !!} </td>
+                                        <td class="center"> {!! $value['role'] !!} </td>
+                                        <td class="center"> {!! $value['id'] !!} </td>
 
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
+
                         <!-- /.table-responsive -->
                     <!-- /.panel-body -->
                 </div>
