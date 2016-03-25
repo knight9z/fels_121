@@ -16,7 +16,6 @@ Route::get('/', function () {
 });
 
 Route::get('change-lang/{iso_code}', 'CommonsController@setLanguage');
-Route::get('category', 'CategoriesController@index');
 
 /*
 |--------------------------------------------------------------------------
@@ -30,5 +29,30 @@ Route::get('category', 'CategoriesController@index');
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+    // Authentication routes...
+    Route::get('auth/login', 'SessionController@getLogin');
+    Route::post('auth/login', 'SessionController@postLogin');
+
+    Route::resource('session', 'SessionController');
+
+    //logout
+    Route::get('auth/logout', 'SessionController@logOut');
+
+    // Registration routes...
+    Route::get('member/register', 'SessionController@getRegister');
+    Route::post('member/register', 'SessionController@postRegister');
+
+    // Router of admin
+    Route::group(['prefix' => '/admin', 'middleware' => ['admin']], function () {
+        Route::get('dashboard', 'AdminController@index');
+    });
+
+
+    // Router of customer
+    Route::group(['prefix' => '/member', 'middleware' => ['user']], function () {
+        //Route::get('dashboard', 'AdminController@index');
+    });
+
 });
+
+
