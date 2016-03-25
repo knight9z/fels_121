@@ -14,8 +14,8 @@ return [
     */
 
     'uploads' => [
-                        'move_fail' => 'Quá trình truyền file có lỗi vui lòng thử lại',
-                        'file_empty' => 'Không có file.',
-                  ],
+        'move_fail' => 'Quá trình truyền file có lỗi vui lòng thử lại',
+        'file_empty' => 'Không có file.',
+    ],
 
 ];

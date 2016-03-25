@@ -14,38 +14,38 @@ return [
     |
     */
 
-    'login' =>   [
-                        'email'  =>[
-                                    'email_required' => 'Require Email ',
-                                    'email_email' => 'Invalid Email'
-                                    ] ,
+    'login'     =>   [
+        'email'  =>[
+            'email_required' => 'Require Email ',
+            'email_email' => 'Invalid Email'
+        ] ,
 
-                        'password' => [
-                                        'password_required' => 'Require Password ',
-                                        'password_between' => 'Password have ' . $userConfig['password_min_length'] . '  to ' . $userConfig['password_max_length'] . '  characters'
-                                    ],
-                        'login_failed' => 'Email or Password wrong !'
-                  ],
+        'password' => [
+            'password_required' => 'Require Password ',
+            'password_between' => 'Password have ' . $userConfig['password_min_length'] . '  to ' . $userConfig['password_max_length'] . '  characters'
+        ],
+        'login_failed' => 'Email or Password wrong !'
+    ],
 
-    'register' =>   [
-                        'name'   =>['email_required' => 'Require Name'],
+    'register'  =>   [
+        'name'   => ['email_required' => 'Require Name'],
 
-                        'avatar' => [
-                            'image_require' => 'Require avatar' ,
-                            'image_mimes'  => 'Images must be of the form jpeg,png'
-                        ],
+        'avatar' => [
+            'image_require' => 'Require avatar' ,
+            'image_mimes'  => 'Images must be of the form jpeg,png'
+        ],
 
-                        'email'  =>[
-                            'email_required' => 'Require Email ',
-                            'email_email' => 'Invalid Email'
-                        ] ,
+        'email'  =>[
+            'email_required' => 'Require Email ',
+            'email_email' => 'Invalid Email'
+        ] ,
 
-                        'password' => [
-                            'password_required' => 'Require password ',
-                            'password_between' => 'Password have ' . $userConfig['password_min_length'] . '  to ' . $userConfig['password_max_length'] . '  characters',
-                            'password_repeat_required' => 'Require password repeat'
-                        ],
+        'password' => [
+            'password_required' => 'Require password ',
+            'password_between' => 'Password have ' . $userConfig['password_min_length'] . '  to ' . $userConfig['password_max_length'] . '  characters',
+            'password_repeat_required' => 'Require password repeat'
+        ],
 
-                  ],
+    ],
 
 ];

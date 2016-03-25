@@ -14,10 +14,10 @@ return [
     */
 
     'validate' => [
-                        'title' => 'Thiếu tiêu đề chuyên mục',
-                        'image_require' => 'Thiếu ảnh đại diện chuyên mục',
-                        'image_mimes' => 'Hình ảnh phải có dạng jpeg,png'
-                  ],
+        'title' => 'Thiếu tiêu đề chuyên mục',
+        'image_require' => 'Thiếu ảnh đại diện chuyên mục',
+        'image_mimes' => 'Hình ảnh phải có dạng jpeg,png'
+    ],
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
 ];

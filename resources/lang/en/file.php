@@ -14,8 +14,8 @@ return [
     */
 
     'uploads' => [
-                        'move_fail' => 'Something went wrong ! Please try again !',
-                        'file_empty' => 'File is empty !',
-                  ],
+        'move_fail' => 'Something went wrong ! Please try again !',
+        'file_empty' => 'File is empty !',
+    ],
 
 ];
