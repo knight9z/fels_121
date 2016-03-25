@@ -14,3 +14,5 @@ storage/
 .env.example
 .idea/workspace.xml
 .idea/
+public/common/bower_components/
+public/uploads

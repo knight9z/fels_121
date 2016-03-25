@@ -169,11 +169,9 @@ class Category extends Common
         try {
             //update arrLocale
             $categoryLocale = new CategoryLocale();
-
             $object->locale = $this->_deletedLocale($categoryLocale, $id);
 
             return $object;
-
         } catch ( \Exception $e) {
             throw $e;
 

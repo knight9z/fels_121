@@ -67,7 +67,7 @@ class Common extends Model
      * @param string $orderBy
      * @return mixed
      */
-    protected function _queryBuild ($fields = ['*'], $filter = [], $orderBy = 'id')
+    protected function _queryBuild($fields = ['*'], $filter = [], $orderBy = 'id')
     {
         $query = $this::select($fields);
 
@@ -88,7 +88,7 @@ class Common extends Model
      * @param array $filter
      * @return array
      */
-    protected function _getListId ($filter = [])
+    protected function _getListId($filter = [])
     {
         $query = $this->_queryBuild(['*'], $filter);
 
@@ -101,7 +101,7 @@ class Common extends Model
      * @param array $filter
      * @return array
      */
-    protected function _getLocales (CommonLocale $commonLocale, $filter = [])
+    protected function _getLocales(CommonLocale $commonLocale, $filter = [])
     {
         $listIds = $this->_getListId(['*'], $filter);
 
@@ -116,7 +116,7 @@ class Common extends Model
      * @param $data
      * @return mixed
      */
-    protected function _mergeLocaleToData ($arrLocale, $data)
+    protected function _mergeLocaleToData($arrLocale, $data)
     {
         if(count($data)) {
 
@@ -134,7 +134,7 @@ class Common extends Model
      * @param $rawData : input data
      * @return array
      */
-    protected function _generateRawDataForLocale ($rawData)
+    protected function _generateRawDataForLocale($rawData)
     {
         $rawLocale = [];
 
@@ -152,7 +152,7 @@ class Common extends Model
      * @param $conditionId : id of root table
      * @return static
      */
-    protected function _createOrUpdateLocale (CommonLocale $commonLocale, $rawLocaleData, $conditionId)
+    protected function _createOrUpdateLocale(CommonLocale $commonLocale, $rawLocaleData, $conditionId)
     {
         return $commonLocale->createOrUpdateLocale($conditionId, $this->foreignKeyInLocale, $rawLocaleData);
     }
@@ -163,7 +163,7 @@ class Common extends Model
      * @return mixed
      * @throws \Exception
      */
-    protected function _deletedLocale (CommonLocale $commonLocale, $conditionId)
+    protected function _deletedLocale(CommonLocale $commonLocale, $conditionId)
     {
         return $commonLocale->deleteWithConditionId($conditionId, $this->foreignKeyInLocale);
     }
@@ -221,7 +221,7 @@ class Common extends Model
      * @return mixed
      * @throws \Exception
      */
-    public function createItem ($rawData)
+    public function createItem($rawData)
     {
         try {
             $object = $this::create($rawData);
@@ -243,7 +243,7 @@ class Common extends Model
      * @return mixed
      * @throws \Exception
      */
-    public function updateItem ($id, $rawData)
+    public function updateItem($id, $rawData)
     {
         try {
             $object = $this::findOrFail($id);
@@ -273,7 +273,7 @@ class Common extends Model
      * @return mixed
      * @throws \Exception
      */
-    public function deleteItem ($id)
+    public function deleteItem($id)
     {
         try {
             $object = $this::findOrFail($id);
