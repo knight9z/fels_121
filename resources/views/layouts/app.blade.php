@@ -40,10 +40,26 @@
 <script src="{!! asset('common/bower_components/metisMenu/dist/metisMenu.min.js') !!}"></script>
 
 <!-- Morris Charts JavaScript -->
-<script src="{!! asset('common/bower_components/raphael/raphael-min.js') !!}"></script>
-<script src="{!! asset('common/bower_components/morrisjs/morris.min.js') !!}"></script>
+<!--script src="{!! asset('common/bower_components/raphael/raphael-min.js') !!}"></script>
+<script src="{!! asset('common/bower_components/morrisjs/morris.min.js') !!}"></script-->
 
 <!-- Custom Theme JavaScript -->
 <script src="{!! asset('common/dist/js/sb-admin-2.js') !!}"></script>
+
+<script type="text/javascript">
+    var elearning ;
+    $(document).ready(function(){
+        elearning = {
+            confirm_delete: function(url){
+                var conf = confirm('Are you sure ?');
+                if(conf)
+                {
+                    window.location.href = url;
+                }
+            },
+        }
+    })
+
+</script>
 
 </html>

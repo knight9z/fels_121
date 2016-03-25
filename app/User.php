@@ -64,7 +64,7 @@ class User extends Authenticatable
      * @param $mailName
      * @return mixed
      */
-    public function getUserByEmail ($mailName)
+    public function getUserByEmail($mailName)
     {
         return User::where('email', $mailName)->first();
     }
@@ -72,7 +72,7 @@ class User extends Authenticatable
     /**
      * @return bool
      */
-    public function isAdmin ()
+    public function isAdmin()
     {
         return $this->role == self::USER_ROLE_ADMIN;
     }
@@ -80,14 +80,20 @@ class User extends Authenticatable
     /**
      * @return bool
      */
-    public function isUser ()
+    public function isUser()
     {
         return $this->role == self::USER_ROLE_USER;
     }
 
-    public function getAllWithPage ($filter, $fields = ['*'], $perPage = 15)
+
+    public function getAllWithPage($filter, $fields = ['*'], $perPage = 15)
     {
         $query = $this->_queryBuild($fields = ['*'] , $filter);
         return $query->paginate($perPage);
+    }
+
+    public function getDetail($id)
+    {
+        return User::find($id);
     }
 }

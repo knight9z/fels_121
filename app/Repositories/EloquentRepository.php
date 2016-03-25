@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Input;
      * @param string $field
      * @return array
      */
-    protected function _uploadImage ($preFix = 'cat', $field = 'image' )
+    protected function _uploadImage($preFix = 'cat', $field = 'image' )
     {
         if(!empty(Input::file($field))){
             $path = public_path('uploads/');
             $imageData = Input::file($field);
-            $imageName = $preFix . "_" . time() . "_" . $imageData->getClientOriginalExtension();
+            $imageName = $preFix . "_" . time() . "." . $imageData->getClientOriginalExtension();
             $image = $imageData->move($path, $imageName);
 
             if (empty($image)) {
@@ -37,9 +37,9 @@ use Illuminate\Support\Facades\Input;
      * @param array $fields
      * @return mixed
      */
-    public function getList ($filter, $fields = ['*'] )
+    public function getList($filter, $fields = ['*'] )
     {
-        return $this->model->getList ($filter, $fields);
+        return $this->model->getList($filter, $fields);
     }
 
     /**
@@ -48,18 +48,18 @@ use Illuminate\Support\Facades\Input;
      * @param $perPage
      * @return mixed
      */
-    public function getAllWithPage ($filter, $fields = ['*'], $perPage = 15)
+    public function getAllWithPage($filter, $fields = ['*'], $perPage = 15)
     {
-        return $this->model->getAllWithPage ($filter, $fields, $perPage);
+        return $this->model->getAllWithPage($filter, $fields, $perPage);
     }
 
     /**
      * @param $id
      * @return mixed
      */
-    public function getDetail ($id)
+    public function getDetail($id)
     {
-        return $this->model->getDetail ($id);
+        return $this->model->getDetail($id);
     }
 
     /**
@@ -68,7 +68,7 @@ use Illuminate\Support\Facades\Input;
      * @return mixed
      * @throws \Exception
      */
-    public function updateItem ($id, $rawData)
+    public function updateItem($id, $rawData)
     {
         try {
             //start transaction

@@ -40,10 +40,10 @@
                 <a href="#"><i class="fa fa-users fa-fw"></i> User<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="#">Lists</a>
+                        <a href="{!! url('./admin/user') !!}">Lists</a>
                     </li>
                     <li>
-                        <a href="#">Create</a>
+                        <a href="{!! url('./admin/user/create') !!}">Create</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->

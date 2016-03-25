@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\User\UserRepositoryInterface;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 
@@ -24,11 +25,9 @@ class UsersController extends CommonsController
      */
     public function index()
     {
-        $data = $this->userRepository->getAllWithPage([], 1);
+        $data = $this->userRepository->getAllWithPage([]);
 
-        //var_dump(get_class($data));die;
-        return $this->_renderView('index', $data);
-
+        return $this->_renderView('index', ['users' => $data]);
     }
 
     /**
@@ -38,7 +37,12 @@ class UsersController extends CommonsController
      */
     public function create()
     {
-        //
+        $dataRole = [
+                   User::USER_ROLE_ADMIN => 'Admin',
+                   User::USER_ROLE_USER => 'Member',
+                ];
+
+        return $this->_renderView('create', ['role' => $dataRole]);
     }
 
     /**
@@ -71,7 +75,8 @@ class UsersController extends CommonsController
      */
     public function edit($id)
     {
-        //
+        $user = $this->userRepository->getDetail($id);
+        return $this->_renderView('', ['users' => $user]);
     }
 
     /**
