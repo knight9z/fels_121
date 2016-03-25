@@ -17,5 +17,8 @@ return [
         'move_fail' => 'Something went wrong ! Please try again !',
         'file_empty' => 'File is empty !',
     ],
+<<<<<<< HEAD
 
+=======
+>>>>>>> develop
 ];

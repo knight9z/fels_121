@@ -4,6 +4,7 @@ namespace App\Repositories;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
+
  class EloquentRepository
 {
     protected $model;
@@ -92,7 +93,7 @@ use Illuminate\Support\Facades\Input;
      * @return mixed
      * @throws \Exception
      */
-    public function createItem ($rawData)
+    public function createItem($rawData)
     {
         try {
             //start transaction
@@ -116,7 +117,7 @@ use Illuminate\Support\Facades\Input;
      * @return mixed
      * @throws \Exception
      */
-    public function deleteItem ($id)
+    public function deleteItem($id)
     {
         try {
             //start transaction
@@ -134,7 +135,4 @@ use Illuminate\Support\Facades\Input;
             //TODO : we wil process in handle exception.
         }
     }
-
-
-
 }

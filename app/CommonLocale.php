@@ -50,7 +50,7 @@ class CommonLocale extends Model
      * @param $conditionField : foreign key of table (Example : category_id, word_answer_id , ...)
      * @return mixed
      */
-    protected function _queryBuild ($conditionListId, $conditionField) {
+    protected function _queryBuild($conditionListId, $conditionField) {
         $query = $this::where('language_id', $this->langId)
                     ->whereIn($conditionField, $conditionListId);
 
@@ -64,7 +64,7 @@ class CommonLocale extends Model
      * @param $rawData
      * @return static
      */
-    public function createOrUpdateLocale ($conditionId, $conditionField, $rawData)
+    public function createOrUpdateLocale($conditionId, $conditionField, $rawData)
     {
         //get locale
         $query = $this->_queryBuild([$conditionId], $conditionField);
@@ -98,7 +98,7 @@ class CommonLocale extends Model
      * @param $conditionField : foreign key of table (Example : category_id, word_answer_id , ...)
      * @return mixed
      */
-    public function getLocale ($conditionId, $conditionField)
+    public function getLocale($conditionId, $conditionField)
     {
         $query = $this->_queryBuild([$conditionId], $conditionField);
 
@@ -112,7 +112,7 @@ class CommonLocale extends Model
      * @param $conditionField : foreign key of table (Example : category_id, word_answer_id , ...)
      * @return mixed
      */
-    public function getLocales ($conditionListId = [], $conditionField)
+    public function getLocales($conditionListId = [], $conditionField)
     {
         $query = $this->_queryBuild($conditionListId, $conditionField);
 
@@ -126,7 +126,7 @@ class CommonLocale extends Model
      * @param $conditionField : foreign key of table (Example : category_id, word_answer_id , ...)
      * @return array
      */
-    public function getLocalesResponseArray ($conditionListId = [], $conditionField)
+    public function getLocalesResponseArray($conditionListId = [], $conditionField)
     {
         $responseData = [];
         $objectData = $this->getLocales($conditionListId, $conditionField);
@@ -147,7 +147,7 @@ class CommonLocale extends Model
      * @return mixed
      * @throws \Exception
      */
-    public function deleteWithConditionId ($conditionListId, $conditionField)
+    public function deleteWithConditionId($conditionListId, $conditionField)
     {
 
         try {

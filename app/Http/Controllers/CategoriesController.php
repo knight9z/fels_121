@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Repositories\Category\CategoryRepoInterface;
+use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Http\Requests\CategoryRequest;
 
 class CategoriesController extends CommonsController
@@ -11,7 +11,7 @@ class CategoriesController extends CommonsController
      */
     public $categoryRepository;
 
-    public function __construct(CategoryRepoInterface $categoryRepository)
+    public function __construct(CategoryRepositoryInterface $categoryRepository)
     {
         parent::__construct();
         $this->categoryRepository = $categoryRepository;
@@ -60,7 +60,7 @@ class CategoriesController extends CommonsController
     public function store(CategoryRequest $request)
     {
         $object = $this->categoryRepository->createItem($request->all());
-        CommonsController::redirectWithAction('CategoriesController', 'index');
+        $this->_redirectWithAction('CategoriesController', 'index');
     }
 
     /**
@@ -84,7 +84,7 @@ class CategoriesController extends CommonsController
     public function update(CategoryRequest $request, $id)
     {
         $responseData = $this->categoryRepository->updateItem($id, $request->all());
-        CommonsController::redirectWithAction('CategoriesController', 'index');
+        $this->_redirectWithAction('CategoriesController', 'index');
     }
 
     /**
@@ -96,6 +96,6 @@ class CategoriesController extends CommonsController
     public function destroy($id)
     {
         $this->categoryRepository->deleteItem($id);
-        CommonsController::redirectWithAction('CategoriesController', 'index');
+        $this->_redirectWithAction('CategoriesController', 'index');
     }
 }

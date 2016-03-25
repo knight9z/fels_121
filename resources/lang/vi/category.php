@@ -19,5 +19,4 @@ return [
         'image_mimes' => 'Hình ảnh phải có dạng jpeg,png'
     ],
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
 ];

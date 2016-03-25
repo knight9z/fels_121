@@ -29,12 +29,7 @@ Route::get('change-lang/{iso_code}', 'CommonsController@setLanguage');
 */
 
 Route::group(['middleware' => ['web']], function () {
-    // Authentication routes...
-    Route::get('auth/login', 'SessionController@getLogin');
-    Route::post('auth/login', 'SessionController@postLogin');
-
     Route::resource('session', 'SessionController');
-
     //logout
     Route::get('auth/logout', 'SessionController@logOut');
 
@@ -47,7 +42,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('dashboard', 'AdminController@index');
         Route::resource('user', 'UsersController');
     });
-
 
     // Router of customer
     Route::group(['prefix' => '/member', 'middleware' => ['user']], function () {

@@ -10,5 +10,4 @@ class CategoryRepository extends EloquentRepository implements CategoryRepositor
     {
         $this->model = $category;
     }
-
 }

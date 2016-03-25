@@ -26,7 +26,7 @@ class CommonsController extends Controller
     {
         $this->input = Input::get();
         //set locale for user
-        $lang = Cookie::get('lang') ? Cookie::get('lang') : 'vi';
+        $lang = Cookie::get('lang', config('constants.default_language'));
         App::setLocale($lang);
         //ToDo : we will set $viewFolder in child classes
     }
@@ -36,9 +36,9 @@ class CommonsController extends Controller
      * @param $data
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    protected function _renderView ($viewName, $data = [])
+    protected function _renderView($viewName, $data = [])
     {
-        return view($this->viewFolder . '.' .$viewName, $data);
+        return view($this->viewFolder . '.' . $viewName, $data);
     }
 
     /**
@@ -62,7 +62,7 @@ class CommonsController extends Controller
      * @param array $errorData
      * @return $this
      */
-    public static function redirectPage ($newRouter = '/', $inputData = [], $errorData = [])
+    protected function _redirectPage($newRouter = '/', $inputData = [], $errorData = [])
     {
         return redirect($newRouter)
             ->withInput($inputData)
@@ -75,7 +75,7 @@ class CommonsController extends Controller
      * @param $outputData
      * @return \Illuminate\Http\RedirectResponse
      */
-    public static function redirectWithAction ($controller, $action, $outputData = [])
+    protected function _redirectWithAction($controller, $action, $outputData = [])
     {
         return redirect()->action($controller . '@' . $action, $outputData);
     }

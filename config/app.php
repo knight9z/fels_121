@@ -158,6 +158,7 @@ return [
         App\Providers\CategoryRepositoryServiceProvider::class,
         App\Providers\UserRepositoryProvider::class,
 
+
     ],
 
     /*
