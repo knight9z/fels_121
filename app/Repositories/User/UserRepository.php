@@ -22,12 +22,7 @@ class UserRepository extends EloquentRepository implements UserRepositoryInterfa
         if ($rawData['password'] != $rawData['password_repeat']) {
             return ['error' => true, 'message' => trans('user.register.compare_password')];
         }
-        // check mail is exist
-        $email = $this->model->getUserByEmail($rawData['email']);
 
-        if ($email) {
-            return ['error' => true, 'message' => trans('user.register.mail_exist')];
-        }
         //upload image
         $dataUpLoad = $this->_uploadImage('user');
 

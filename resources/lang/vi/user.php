@@ -38,7 +38,8 @@ return [
 
         'email'     =>  [
             'email_required' => 'Thiếu Email ',
-            'email_email' => 'Mail nhập không đúng'
+            'email_email' => 'Mail nhập không đúng',
+            'mail_exist' => 'Email đã được đăng ký'
         ],
 
         'password'  =>  [
@@ -53,7 +54,7 @@ return [
 
         'compare_password' => 'Nhấp lại mật khẩu không đúng',
         'register_failed' => 'Có lỗi vui lòng thử lại.',
-        'mail_exist' => 'Email đã được đăng ký',
+
     ],
 
 ];

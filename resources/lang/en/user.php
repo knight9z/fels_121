@@ -37,6 +37,7 @@ return [
 
         'email'  =>[
             'email_required' => 'Require Email ',
+            'mail_exist' => 'Email is existed ',
             'email_email' => 'Invalid Email'
         ] ,
 
