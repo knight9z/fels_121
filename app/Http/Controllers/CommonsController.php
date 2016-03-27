@@ -6,6 +6,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Auth;
 
 class CommonsController extends Controller
 {
@@ -39,6 +40,22 @@ class CommonsController extends Controller
     protected function _renderView($viewName, $data = [])
     {
         return view($this->viewFolder . '.' . $viewName, $data);
+    }
+
+    /**
+     * @param string $viewName
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    protected function _checkLogin ($viewName = 'create') {
+        if (Auth::user()) {
+            if (Auth::user()->isAdmin()) {
+                return redirect()->action('AdminController@index');
+            }
+
+            return redirect()->action('ClientController@index');
+        }
+
+        return view($this->viewFolder . '.' . $viewName);
     }
 
     /**
