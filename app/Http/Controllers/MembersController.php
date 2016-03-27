@@ -61,7 +61,7 @@ class MembersController extends CommonsController
 
         } else {
             return redirect()->action('SessionsController@create');
-            
+
         }
     }
 
