@@ -16,7 +16,6 @@ Route::get('/', function () {
 });
 
 Route::get('change-lang/{iso_code}', 'CommonsController@setLanguage');
-Route::get('category', 'CategoriesController@index');
 
 /*
 |--------------------------------------------------------------------------
@@ -30,5 +29,6 @@ Route::get('category', 'CategoriesController@index');
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+    //create member
+    Route::resource('member', 'MembersController', array('only' => ['store', 'create']));
 });
