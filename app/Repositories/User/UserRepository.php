@@ -4,6 +4,7 @@ namespace App\Repositories\User;
 use App\User;
 use App\Repositories\EloquentRepository;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Input;
 
 class UserRepository extends EloquentRepository implements UserRepositoryInterface
 {
@@ -54,6 +55,38 @@ class UserRepository extends EloquentRepository implements UserRepositoryInterfa
     public function isUser ()
     {
         return $this->model->isUser();
+    }
+
+    /**
+     * @param $id
+     * @param $rawData
+     * @return array
+     */
+    public function updateItem($id, $rawData)
+    {
+        if(isset($rawData['password']) && $rawData['password']) {
+            //check conform pass word
+            if ($rawData['password'] != $rawData['password_repeat']) {
+                return ['error' => true, 'message' => trans('user.register.compare_password')];
+            }
+
+            $rawData['password'] = Hash::make($rawData['password']);
+        }
+
+        if(!empty(Input::file('image'))){
+            //upload image
+            $dataUpLoad = $this->_uploadImage('user');
+
+            if ($dataUpLoad['error']) {
+                return ['error' => true, 'message' => $dataUpLoad['message']];
+            }
+            //add data
+            $rawData['avatar'] = $dataUpLoad['data'];
+        }
+
+        $objectData =$this->model->updateItem($id, $rawData);
+
+        return ['error' => false, 'data' => $objectData];
     }
 
 
