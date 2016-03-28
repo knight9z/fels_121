@@ -31,4 +31,11 @@ Route::get('change-lang/{iso_code}', 'CommonsController@setLanguage');
 Route::group(['middleware' => ['web']], function () {
     //create member
     Route::resource('member', 'MembersController', array('only' => ['store', 'create']));
+
+    //create session (login function)
+    Route::resource('session', 'SessionsController', array('only' => ['store', 'create']));
+
+    //logout function
+    Route::get('session/destroy', 'SessionsController@logOut');
+
 });
