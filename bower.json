@@ -1,0 +1,29 @@
+{
+  "name": "elearning",
+  "description": "Elearning Framgia",
+  "main": "",
+  "directory": "public/bower_components",
+  "authors": [
+    "Viet Anh <nv2anh@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "elearning"
+  ],
+  "homepage": "https://github.com/knight9z/fels_121",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "metisMenu": "^2.4.3",
+    "font-awesome": "^4.5.0"
+  }
+}
