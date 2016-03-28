@@ -92,8 +92,10 @@ class CommonsController extends Controller
      * @param $outputData
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function _redirectWithAction($controller, $action, $outputData = [])
+    protected function _redirectWithAction($controller, $action, $inputData = [], $errorData= [])
     {
-        return redirect()->action($controller . '@' . $action, $outputData);
+        return redirect()->action($controller . '@' . $action)
+            ->withInput($inputData)
+            ->withErrors($errorData);
     }
 }

@@ -44,7 +44,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('dashboard', 'AdminsController@index');
 
         //manager of user
-        Route::resource('user', 'UsersController');
+        Route::resource('user', 'UsersController', array('except' => ['destroy']));
+        //remove user
+        Route::get('delete/user/{id}', 'UsersController@destroy');
     });
 
 

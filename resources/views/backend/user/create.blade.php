@@ -13,59 +13,56 @@
             <div class="col-lg-6 col-lg-offset-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        {!!trans('backend/user/update.title') !!}
+                        {!!trans('backend/user/create.title') !!}
                     </div>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-10 col-lg-offset-1">
                                 @include('layouts.errors')
-                                    {!! Form::open(array('url' => 'admin/user/' . $user->id, 'method' => 'PUT', 'enctype' => "multipart/form-data")) !!}
+                                    {!! Form::open(array('url' => 'admin/user/', 'method' => 'POST', 'enctype' => "multipart/form-data")) !!}
                                     <fieldset>
-                                        <div class="form-group">
-                                            <input class="form-control" placeholder="" value="{{ $user->id }}" name="id" type="hidden">
-                                        </div>
 
                                         <div class="form-group">
-                                            <label>{!!  trans('backend/user/update.placeholder.name') !!}</label>
-                                            {!! Form::text('name', $user->name, array('class' => 'form-control', 'placeholder' => trans('backend/user/update.placeholder.name'), 'autofocus' => true)) !!}
+                                            <label>{!!  trans('backend/user/create.placeholder.name') !!}</label>
+                                            {!! Form::text('name', old('name'), array('class' => 'form-control', 'placeholder' => trans('backend/user/create.placeholder.name'), 'autofocus' => true)) !!}
                                         </div>
 
                                         @include('layouts.errors_detail', ['fieldError' => 'name'])
 
                                         <div class="form-group">
-                                            <label>{!!  trans('backend/user/update.placeholder.email') !!}</label>
-                                            {!! Form::email('email', $user->email, array('class' => 'form-control', 'placeholder' => trans('backend/user/update.placeholder.email'))) !!}
+                                            <label>{!!  trans('backend/user/create.placeholder.email') !!}</label>
+                                            {!! Form::email('email', old('email'), array('class' => 'form-control', 'placeholder' => trans('backend/user/create.placeholder.email'))) !!}
                                         </div>
 
                                         @include('layouts.errors_detail', ['fieldError' => 'email'])
 
                                         <div class="form-group">
-                                            <label>{!!  trans('backend/user/update.placeholder.password') !!}</label>
-                                            {!! Form::password('password', array('class' => 'form-control', 'placeholder' => trans('backend/user/update.placeholder.password'))) !!}
+                                            <label>{!!  trans('backend/user/create.placeholder.password') !!}</label>
+                                            {!! Form::password('password', array('class' => 'form-control', 'placeholder' => trans('backend/user/create.placeholder.password'))) !!}
                                         </div>
 
                                         @include('layouts.errors_detail', ['fieldError' => 'password'])
 
                                         <div class="form-group">
-                                            <label>{!!  trans('backend/user/update.placeholder.password_repeat') !!}</label>
-                                            {!! Form::password('password_repeat', array('class' => 'form-control', 'placeholder' => trans('backend/user/update.placeholder.password_repeat'))) !!}
+                                            <label>{!!  trans('backend/user/create.placeholder.password_repeat') !!}</label>
+                                            {!! Form::password('password_repeat', array('class' => 'form-control', 'placeholder' => trans('backend/user/create.placeholder.password_repeat'))) !!}
                                         </div>
 
                                         @include('layouts.errors_detail', ['fieldError' => 'password_repeat'])
 
                                         <div class="form-group">
-                                            <label>{!!  trans('backend/user/update.placeholder.role') !!}</label>
-                                            {!! Form::select('role', $roles, $user->role, array('class' => 'form-control')) !!}
+                                            <label>{!!  trans('backend/user/create.placeholder.role') !!}</label>
+                                            {!! Form::select('role', $roles, old('role'), array('class' => 'form-control')) !!}
                                         </div>
                                         @include('layouts.errors_detail', ['fieldError' => 'role'])
 
                                         <div class="form-group">
-                                            <label>{!!  trans('backend/user/update.placeholder.image') !!}</label>
-                                            {!! Form::file('image', array('class' => 'form-control', 'placeholder' => trans('backend/user/update.placeholder.image') )) !!}
+                                            <label>{!!  trans('backend/user/create.placeholder.image') !!}</label>
+                                            {!! Form::file('image', array('class' => 'form-control', 'placeholder' => trans('backend/user/create.placeholder.image') )) !!}
                                         </div>
 
                                         <!-- Change this to a button or input when using this as a form -->
-                                        {!! Form::submit(trans('backend/user/update.button'), ['class' => 'btn btn-primary']) !!}
+                                        {!! Form::submit(trans('backend/user/create.button'), ['class' => 'btn btn-primary']) !!}
 
                                     </fieldset>
                                 </form>

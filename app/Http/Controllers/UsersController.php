@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserCreateRequest;
 use App\Repositories\User\UserRepositoryInterface;
 use App\User;
-use Illuminate\Http\Request;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends CommonsController
 {
@@ -43,7 +44,7 @@ class UsersController extends CommonsController
      */
     public function create()
     {
-        return $this->_renderView('create', ['role' => $this->roleData]);
+        return $this->_renderView('create', ['roles' => $this->roleData]);
     }
 
     /**
@@ -52,9 +53,17 @@ class UsersController extends CommonsController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserCreateRequest $request)
     {
-        //
+        $rawData = $request->all();
+        $responseFromRepository = $this->userRepository->createItem($rawData);
+        if($responseFromRepository['error']){
+            return $this->_redirectWithAction('UsersController@create', $rawData, [$responseFromRepository['message']]);
+
+        } else {
+            return $this->_redirectWithAction('UsersController','index');
+
+        }
     }
 
     /**
@@ -90,15 +99,12 @@ class UsersController extends CommonsController
     public function update(UserUpdateRequest $request, $id)
     {
         $rawData = $request->all();
-
-        $responseFromRepo = $this->userRepository->updateItem($id, $rawData);
-        if($responseFromRepo['error']){
-            return redirect()->action('UsersController@update')
-                ->withErrors([$responseFromRepo['message']])
-                ->withInput($rawData);
+        $responseFromRepository = $this->userRepository->updateItem($id, $rawData);
+        if($responseFromRepository['error']){
+            return $this->_redirectWithAction('UsersController@create', $rawData, [$responseFromRepository['message']]);
 
         } else {
-            return redirect()->action('UsersController@index');
+            return $this->_redirectWithAction('UsersController','index');
 
         }
     }
@@ -111,6 +117,15 @@ class UsersController extends CommonsController
      */
     public function destroy($id)
     {
-        //
+        $userId = Auth::user()->id;
+        if ($userId == $id) {
+            $errors[] = trans('user.destroy.remove_mine');
+
+            return $this->_redirectWithAction('UsersController', 'index', [], $errors);
+        }
+
+        $object = $this->userRepository->deleteItem($id);
+
+        return $this->_redirectWithAction('UsersController', 'index');
     }
 }

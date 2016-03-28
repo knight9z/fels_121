@@ -11,6 +11,7 @@
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
+                    @include('layouts.errors');
                     <div class="panel panel-default">
                         <!-- /.panel-heading -->
                         <div class="dataTable_wrapper">
@@ -43,7 +44,7 @@
                                         </td>
                                         <td class="center">
                                             <a href="{!! url('./admin/user/' . $value['id'] . '/edit') !!}" class="btn btn-primary btn-xs"><i title="Edit book" class="fa fa-pencil"></i></a>
-                                            <a href="javascript:elearning.confirm_delete('{{ url('./admin/user') }}');" class="btn btn-danger btn-xs"><i title="Delete" class="fa fa-trash-o"></i></a>
+                                            <a href="javascript:elearning.confirm_delete('{{ url('./admin/delete/user/' . $value['id']) }}');" class="btn btn-danger btn-xs"><i title="Delete" class="fa fa-trash-o"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -2,10 +2,13 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    use SoftDeletes;
+
     const USER_ROLE_ADMIN = 1;
     const USER_ROLE_MEMBER = 2;
 
@@ -113,7 +116,6 @@ class User extends Authenticatable
 
     public function updateItem($id, $rawData)
     {
-
         try {
             $object = User::findOrFail($id);
 
@@ -127,6 +129,21 @@ class User extends Authenticatable
             $object->save();
 
             //TODO : In the classes extend, we can continue process data (if it is necessary)
+            return $object;
+
+        } catch ( \Exception $e) {
+            throw $e;
+
+        }
+    }
+
+    public function deleteItem($id)
+    {
+        try {
+            $object = User::findOrFail($id);
+            $object->delete();
+
+            //TODO : In the classes extend, we can continue process data (if it is necessary) and use soft delete
             return $object;
 
         } catch ( \Exception $e) {

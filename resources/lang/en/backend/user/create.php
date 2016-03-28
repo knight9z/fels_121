@@ -7,8 +7,8 @@ return [
         'password' => 'Password',
         'password_repeat' => 'Password Repeat',
         'role' => 'Role',
-        'image' => 'image'
+        'image' => 'Image',
     ],
-    'button' => 'Update',
-    'title' => 'Update User',
+    'button' => 'Create',
+    'title' => 'Create User',
 ];

@@ -29,7 +29,8 @@ class UserRepository extends EloquentRepository implements UserRepositoryInterfa
          }
          //add data
          $rawData['avatar'] = $dataUpLoad['data'];
-         $rawData['password'] = Hash::make($rawData['password']);$rawData['role'] = User::USER_ROLE_MEMBER;
+         $rawData['password'] = Hash::make($rawData['password']);
+         $rawData['role'] = isset($rawData['role']) ? $rawData['role'] : User::USER_ROLE_MEMBER;
 
          $objectData =$this->model->createItem($rawData);
 

@@ -46,7 +46,9 @@ return [
             'password_between' => 'Password have ' . $userConfig['password_min_length'] . '  to ' . $userConfig['password_max_length'] . '  characters',
             'password_repeat_required' => 'Require password repeat'
         ],
-
     ],
+    'destroy' => [
+        'remove_mine' => 'You can not remove yourself '
+    ]
 
 ];

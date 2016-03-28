@@ -46,4 +46,19 @@
 <!-- Custom Theme JavaScript -->
 <script src="{!! asset('common/dist/js/sb-admin-2.js') !!}"></script>
 
+<script type="text/javascript">
+    var elearning;
+    $(document).ready(function(){
+        elearning = {
+            confirm_delete: function(url){
+                var conf = confirm('{!! trans('backend/layout.question_delete') !!}');
+                if(conf)
+                {
+                    window.location.href = url;
+                }
+            },
+        }
+    });
+</script>
+
 </html>
