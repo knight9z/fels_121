@@ -10,9 +10,7 @@
                 </div>
                 <div class="panel-body">
                     @include('layouts.errors')
-
                         {!! Form::open(array('url' => 'member', 'method' => 'post', 'enctype' => "multipart/form-data")) !!}
-
                         <fieldset>
                             <div class="form-group">
                                 {!! Form::text('name', old('name'), array('class' => 'form-control', 'placeholder' => trans('frontend/member/create.placeholder.name'), 'autofocus' => true)) !!}
