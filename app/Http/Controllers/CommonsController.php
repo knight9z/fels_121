@@ -6,6 +6,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Auth;
 
 class CommonsController extends Controller
 {
@@ -42,6 +43,22 @@ class CommonsController extends Controller
     }
 
     /**
+     * @param string $viewName
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    protected function _checkLogin ($viewName = 'create') {
+        if (Auth::user()) {
+            if (Auth::user()->isAdmin()) {
+                return $this->_redirectWithAction('AdminController', 'index');
+            }
+
+            return $this->_redirectWithAction('ClientController', 'index');
+        }
+
+        return $this->_renderView($viewName);
+    }
+
+    /**
      * Set language
      * @param string $isoCode
      * @return $this
@@ -72,11 +89,14 @@ class CommonsController extends Controller
     /**
      * @param $controller
      * @param $action
-     * @param $outputData
-     * @return \Illuminate\Http\RedirectResponse
+     * @param array $inputData
+     * @param array $errorData
+     * @return $this
      */
-    protected function _redirectWithAction($controller, $action, $outputData = [])
+    protected function _redirectWithAction($controller, $action, $inputData = [], $errorData= [])
     {
-        return redirect()->action($controller . '@' . $action, $outputData);
+        return redirect()->action($controller . '@' . $action)
+                        ->withInput($inputData)
+                        ->withErrors($errorData);
     }
 }

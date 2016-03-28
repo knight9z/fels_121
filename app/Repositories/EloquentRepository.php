@@ -2,10 +2,37 @@
 namespace App\Repositories;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
- class EloquentRepository
+class EloquentRepository
 {
-    protected $model;
+     protected $model;
+
+     /**
+      * upload image
+      * @param string $prefix
+      * @param string $field
+      * @return array
+      */
+     protected function _uploadImage($prefix = 'cat', $field = 'image' )
+     {
+         if (!empty(Input::file($field))) {
+             $path = public_path('uploads/');
+             $imageData = Input::file($field);
+             $imageName = $prefix . '_' . time() . '.' . $imageData->getClientOriginalExtension();
+             $image = $imageData->move($path, $imageName);
+
+             if (empty($image)) {
+                 return ['error' => true, 'message' => trans('file.uploads.move_fail')];
+
+             }
+
+             return ['error' => false, 'data' => $imageName];
+         }
+
+         return ['error' => true, 'message' => trans('file.uploads.file_empty')];
+     }
+
     /**
      * @param $filter
      * @param array $fields

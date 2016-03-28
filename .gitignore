@@ -16,3 +16,5 @@ storage/
 .idea/
 public/common/bower_components/
 public/uploads/
+composer.lock
+
