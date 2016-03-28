@@ -15,4 +15,4 @@ storage/
 .idea/workspace.xml
 .idea/
 public/common/bower_components/
-public/uploads
+public/uploads/
