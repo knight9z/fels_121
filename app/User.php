@@ -2,10 +2,13 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    use SoftDeletes;
+
     const USER_ROLE_ADMIN = 1;
     const USER_ROLE_MEMBER = 2;
 
@@ -17,6 +20,33 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password', 'role', 'avatar'
     ];
+
+
+    /**
+     * allowed filter field
+     *
+     * @var array
+     */
+    protected $filterFields = ['id', 'email', 'name', 'role'];
+
+    /**
+     * build query
+     * @param array $fields
+     * @param array $filter
+     * @param string $orderBy
+     * @return mixed
+     */
+    protected function _queryBuild ($fields = ['*'], $filter = [], $orderBy = 'id')
+    {
+        $query = $this::select($fields);
+        foreach ($this->filterFields as $field) {
+            if (isset($filter[$field])) {
+                $query = $query->where($field, $filter[$field]);
+            }
+        }
+        $query = $query->orderBy($orderBy);
+        return $query;
+    }
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -62,4 +92,64 @@ class User extends Authenticatable
     {
         return User::create($rawData);
     }
+
+    /**
+     * @param $filter
+     * @param array $fields
+     * @param int $perPage
+     * @return mixed
+     */
+    public function getAllWithPage($filter, $fields = ['*'], $perPage = 15)
+    {
+        $query = $this->_queryBuild($fields = ['*'] , $filter);
+        return $query->paginate($perPage);
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getDetail($id)
+    {
+        return User::find($id);
+    }
+
+    public function updateItem($id, $rawData)
+    {
+        try {
+            $object = User::findOrFail($id);
+
+            foreach ($this->fillable as $field) {
+                if (isset($rawData[$field])) {
+                    $object->{$field} = $rawData[$field];
+
+                }
+            }
+
+            $object->save();
+
+            //TODO : In the classes extend, we can continue process data (if it is necessary)
+            return $object;
+
+        } catch ( \Exception $e) {
+            throw $e;
+
+        }
+    }
+
+    public function deleteItem($id)
+    {
+        try {
+            $object = User::findOrFail($id);
+            $object->delete();
+
+            //TODO : In the classes extend, we can continue process data (if it is necessary) and use soft delete
+            return $object;
+
+        } catch ( \Exception $e) {
+            throw $e;
+
+        }
+    }
+
 }

@@ -49,5 +49,9 @@ return [
         'compare_password' => 'Nhấp lại mật khẩu không đúng',
         'register_failed' => 'Có lỗi vui lòng thử lại.',
     ],
+    'role' => [
+        'admin' => 'Quản trị viên',
+        'member' => 'Người dùng',
+    ]
 
 ];
