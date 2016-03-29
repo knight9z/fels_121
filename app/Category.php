@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Log;
 
 class Category extends Common
 {
@@ -104,20 +105,21 @@ class Category extends Common
      */
     public function createItem($rawData)
     {
-        //extend function
-        $object = parent::createItem($rawData);
+
 
         //generate data value
         $rawDataLocale = $this->_generateRawDataForLocale($rawData);
 
         try {
-            //create arrLocale
-            $categoryLocale = new CategoryLocale();
+            //extend function
+            $object = parent::createItem($rawData);
 
-            $object->locale = $this->_createOrUpdateLocale($categoryLocale, $rawDataLocale, $object->id);
+            Log::debug($rawDataLocale);
 
+            $object->locale = CategoryLocale::create($rawDataLocale);
+
+            Log::debug($object->locale);
             return $object;
-
         } catch ( \Exception $e) {
             throw $e;
 
