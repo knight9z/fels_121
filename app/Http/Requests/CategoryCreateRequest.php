@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
-class CategoryRequest extends Request
+class CategoryCreateRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,18 +22,18 @@ class CategoryRequest extends Request
     public function rules()
     {
         return [
-                'image' => 'required|mimes:jpeg,png',
-                'title' => 'required',
+            'image' => 'required|mimes:jpeg,png',
+            'title' => 'required',
         ];
     }
 
 
     public function messages()
-     {
-         return [
-             'image.required' => trans('category.validate.image_require'),
-             'image.mimes' => trans('category.validate.image_mimes'),
-             'title.required' => trans('category.validate.title'),
-         ];
-     }
+    {
+        return [
+            'image.required' => trans('category.validate.image_require'),
+            'image.mimes' => trans('category.validate.image_mimes'),
+            'title.required' => trans('category.validate.title'),
+        ];
+    }
 }

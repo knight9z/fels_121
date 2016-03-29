@@ -24,7 +24,7 @@ class Category extends Common
     /**
      * @var array
      */
-    protected $multiLanguages = ['name', 'title', 'summary'];
+    protected $multiLanguages = ['title', 'summary'];
 
     /**
      * foreign key of table locale relate
@@ -102,7 +102,7 @@ class Category extends Common
      * @return mixed
      * @throws \Exception
      */
-    public function createItem ($rawData)
+    public function createItem($rawData)
     {
         //extend function
         $object = parent::createItem($rawData);
@@ -132,7 +132,7 @@ class Category extends Common
      * @return mixed
      * @throws \Exception
      */
-    public function updateItem ($id, $rawData)
+    public function updateItem($id, $rawData)
     {
         //extend function
         $object = parent::updateItem($id, $rawData);
@@ -161,7 +161,7 @@ class Category extends Common
      * @return mixed
      * @throws \Exception
      */
-    public function deleteItem ($id)
+    public function deleteItem($id)
     {
         //extend function
         $object = parent::deleteItem($id);

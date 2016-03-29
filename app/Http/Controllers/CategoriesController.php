@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\Category\CategoryRepositoryInterface;
-use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\CategoryCreateRequest;
 
 class CategoriesController extends CommonsController
 {
@@ -15,7 +15,7 @@ class CategoriesController extends CommonsController
     {
         parent::__construct();
         $this->categoryRepository = $categoryRepository;
-        $this->viewFolder = 'category';
+        $this->viewFolder = 'backend.category';
     }
 
     /**
@@ -50,14 +50,13 @@ class CategoriesController extends CommonsController
      */
     public function create()
     {
-        $this->_renderView('create');
+        return $this->_renderView('create');
     }
 
     /**
-     * @param CategoryRequest $request
-     * @return mixed
+     * @param CategoryCreateRequest $request
      */
-    public function store(CategoryRequest $request)
+    public function store(CategoryCreateRequest $request)
     {
         $object = $this->categoryRepository->createItem($request->all());
         $this->_redirectWithAction('CategoriesController', 'index');

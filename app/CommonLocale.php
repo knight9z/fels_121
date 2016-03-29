@@ -87,7 +87,6 @@ class CommonLocale extends Model
 
         }
 
-
         return $objectResponse;
     }
 
