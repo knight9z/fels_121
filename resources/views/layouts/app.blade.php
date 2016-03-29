@@ -30,7 +30,7 @@
 </body>
 
 <!-- jQuery -->
-{!! Html::script('common/bower_components/font-awesome/css/font-awesome.min.css') !!}
+{!! Html::script('common/bower_components/jquery/dist/jquery.min.js') !!}
 
 <!-- Bootstrap Core JavaScript -->
 {!! Html::script('common/bower_components/bootstrap/dist/js/bootstrap.min.js') !!}
