@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Log;
 
 class CommonLocale extends Model
 {
@@ -21,7 +22,7 @@ class CommonLocale extends Model
     /**
      * Don't forget to fill this array
      */
-    protected $fillable = [];
+    protected $fillable = ['language_id'];
 
     /**
      * allowed update field
@@ -83,8 +84,12 @@ class CommonLocale extends Model
             // action create
             $rawData['language_id'] = $this->langId;
             $rawData[$conditionField] = $conditionId;
-            $objectResponse = $this::create($rawData);
+            Log::alert($this->fillable);
+            Log::debug($rawData);
+            $this->insertData($rawData);
 
+            //$objectResponse = $this::create($rawData);
+           // Log::debug(json_encode($objectResponse));
         }
 
         return $objectResponse;
@@ -162,4 +167,8 @@ class CommonLocale extends Model
         }
     }
 
+    public function insertData ($rawData) {
+        $a = CategoryLocale::create($rawData);
+        Log::alert($a);
+    }
 }

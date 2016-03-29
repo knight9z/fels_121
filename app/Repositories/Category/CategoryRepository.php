@@ -15,13 +15,13 @@ class CategoryRepository extends EloquentRepository implements CategoryRepositor
     public function createItem($rawData)
     {
         //upload image
-        $dataUpLoad = $this->_uploadImage('user');
+        $dataUpLoad = $this->_uploadImage('category');
 
         if ($dataUpLoad['error']) {
             return ['error' => true, 'message' => $dataUpLoad['message']];
         }
         //add data
-        $rawData['avatar'] = $dataUpLoad['data'];
+        $rawData['image'] = $dataUpLoad['data'];
 
         $objectData = parent::createItem($rawData);
 
