@@ -38,4 +38,9 @@ Route::group(['middleware' => ['web']], function () {
     //logout function
     Route::get('session/destroy', 'SessionsController@logOut');
 
+    // Router of admin
+    Route::group(['prefix' => '/admin', 'middleware' => ['admin']], function () {
+        Route::get('dashboard', 'AdminsController@index');
+    });
+
 });
