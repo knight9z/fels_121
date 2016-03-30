@@ -174,7 +174,7 @@ class Common extends Model
      * @param array $fields : the need to get columns
      * @return mixed
      */
-    public function getAll($fields = ['*'], $filter = [])
+    public function getList($fields = ['*'], $filter = [])
     {
         $query = $this->_queryBuild($fields, $filter);
 

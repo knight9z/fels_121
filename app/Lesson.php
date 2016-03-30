@@ -2,33 +2,35 @@
 
 namespace App;
 
-class Category extends Common
+use Illuminate\Database\Eloquent\Model;
+
+class Lesson extends Common
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'categories';
+    protected $table = 'lessons';
 
     /**
      * Don't forget to fill this array
      *
      * @var array
      */
-    protected $fillable = ['image'];
+    protected $fillable = ['category_id'];
 
     /**
      * @var array
      */
-    protected $multiLanguages = ['title', 'summary'];
+    protected $multiLanguages = ['title'];
 
     /**
      * foreign key of table locale relate
      *
      * @var string
      */
-    protected $foreignKeyInLocale = 'category_id';
+    protected $foreignKeyInLocale = 'lesson_id';
 
     /**
      * The accessors to append to the model's array form.
@@ -40,9 +42,11 @@ class Category extends Common
     /**
      * @var array
      */
-    protected $updateFields = ['image'];
+    protected $updateFields = ['category_id'];
 
     /**
+     * get title locale
+     *
      * @return array
      */
     public function getLocaleAttribute()
@@ -50,11 +54,10 @@ class Category extends Common
         $locales = [
             'id' => 0,
             'title' => 'No data in this language',
-            'summary' => 'No data in this language',
         ];
 
-        $categoryLocale = new CategoryLocale();
-        $data = $categoryLocale->getLocale($this->id, $this->foreignKeyInLocale);
+        $lessonLocale = new LessonLocale();
+        $data = $lessonLocale->getLocale($this->id, $this->foreignKeyInLocale);
         if ($data) {
             $locales['title'] = $data->title;
             $locales['summary'] = $data->summary;
@@ -64,15 +67,32 @@ class Category extends Common
         return $locales;
     }
 
-    public function getList($fields = ['*'], $filter = [])
+    /**
+     * belong to with category
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
     {
-        $responseData = [];
-        $categories = parent::getList($fields = ['*'], $filter = []);
-        foreach ($categories as $category) {
-            $responseData[$category->id] = $category->locale['title'];
+        return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * get all record and padding
+     *
+     * @param array $filter
+     * @param array $fields
+     * @param int $perPage
+     * @return mixed
+     */
+    public function getAllWithPage($filter = [], $fields = ['*'], $perPage = 15)
+    {
+        $lessons = parent::getAllWithPage($filter, $fields, $perPage);
+        foreach ($lessons as $lesson){
+            $lesson->category;
         }
 
-        return $responseData;
+        return $lessons;
     }
 
     /**
@@ -92,9 +112,9 @@ class Category extends Common
 
         try {
             //create arrLocale
-            $categoryLocale = new CategoryLocale();
+            $lessonLocale = new LessonLocale();
 
-            $object->locale = $this->_createOrUpdateLocale($categoryLocale, $rawDataLocale, $object->id);
+            $object->locale = $this->_createOrUpdateLocale($lessonLocale, $rawDataLocale, $object->id);
 
             return $object;
 
@@ -122,9 +142,9 @@ class Category extends Common
             $object = parent::updateItem($id, $rawData);
 
             //update arrLocale
-            $categoryLocale = new CategoryLocale();
+            $lessonLocale = new LessonLocale();
 
-            $object->locale = $this->_createOrUpdateLocale($categoryLocale, $rawDataLocale, $id);
+            $object->locale = $this->_createOrUpdateLocale($lessonLocale, $rawDataLocale, $id);
 
             return $object;
         } catch ( \Exception $e) {
@@ -142,13 +162,13 @@ class Category extends Common
      */
     public function deleteItem($id)
     {
-        //extend function
-        $object = parent::deleteItem($id);
 
         try {
+            //extend function
+            $object = parent::deleteItem($id);
+
             //update arrLocale
-            $categoryLocale = new CategoryLocale();
-            $object->locale = $this->_deletedLocale($categoryLocale, $id);
+            LessonLocale::where('lesson_id', $id)->delete();
 
             return $object;
         } catch ( \Exception $e) {
@@ -156,5 +176,4 @@ class Category extends Common
 
         }
     }
-
 }

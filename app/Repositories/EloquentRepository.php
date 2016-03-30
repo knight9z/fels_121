@@ -41,7 +41,7 @@ class EloquentRepository
      */
     public function getList($filter, $fields = ['*'] )
     {
-        return $this->model->getList ($filter, $fields);
+        return $this->model->getList ($fields, $filter);
     }
 
     /**
