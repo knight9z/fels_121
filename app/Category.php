@@ -2,9 +2,6 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-
 class Category extends Common
 {
     /**
@@ -24,7 +21,7 @@ class Category extends Common
     /**
      * @var array
      */
-    protected $multiLanguages = ['name', 'title', 'summary'];
+    protected $multiLanguages = ['title', 'summary'];
 
     /**
      * foreign key of table locale relate
@@ -33,66 +30,56 @@ class Category extends Common
      */
     protected $foreignKeyInLocale = 'category_id';
 
-
     /**
-     * get list items of table
-     * @param array $filter : condition of query
-     * @param array $fields : the need to get columns
-     * @return mixed
-     */
-    public function getAll($fields = ['*'], $filter = [])
-    {
-        //extend function
-        $items = parent::getAll($fields, $filter);
-
-        //get arrLocale
-        $categoryLocale = new CategoryLocale();
-        $arrLocale = $this->_getLocales($categoryLocale, $filter);
-
-        //merge locale to response data
-        $items = $this->_mergeLocaleToData($arrLocale, $items);
-
-        return $items;
-    }
-
-
-    /**
-     * get list items of table and paging
-     * @param array $filter : condition of query
-     * @param array $fields : the need to get columns
-     * @return mixed
-     */
-    public function getAllWithPage($filter = [], $fields = ['*'], $perPage = 15)
-    {
-        //extend function
-        $items = parent::getAllWithPage($filter, $fields, $perPage);
-
-        //get arrLocale
-        $categoryLocale = new CategoryLocale();
-        $arrLocale = $this->_getLocales($categoryLocale,  $filter);
-
-        //merge locale to response data
-        $items['data'] = $this->_mergeLocaleToData($arrLocale, $items['data']);
-
-        return $items;
-    }
-
-    /**
-     * get detail a record
+     * The accessors to append to the model's array form.
      *
-     * @param $id : id of table
-     * @return mixed
+     * @var array
      */
-    public function getDetail($id)
+    protected $appends = ['locale'];
+
+    /**
+     * @var array
+     */
+    protected $updateFields = ['image'];
+
+    /**
+     * @return array
+     */
+    public function getLocaleAttribute()
     {
-        //extend function
-        $item = parent::getDetail($id);
+        $locales = [
+            'id' => 0,
+            'title' => 'No data in this language',
+            'summary' => 'No data in this language',
+        ];
 
-        //get arrLocale
         $categoryLocale = new CategoryLocale();
-        $item->locale = $categoryLocale->getLocale($id, $this->foreignKeyInLocale);
+        $data = $categoryLocale->getLocale($this->id, $this->foreignKeyInLocale);
+        if ($data) {
+            $locales['title'] = $data->title;
+            $locales['summary'] = $data->summary;
+            $locales['id'] = $data->id;
+        }
 
-        return $item;
+        return $locales;
+    }
+
+    /**
+     * get all category for select box in view
+     *
+     * @param array $fields
+     * @param array $filter
+     * @return array
+     */
+    public function getList($fields = ['*'], $filter = [])
+    {
+        $responseData = [];
+        $categories = parent::getList($fields = ['*'], $filter = []);
+        foreach ($categories as $category) {
+            $responseData[$category->id] = $category->locale['title'];
+        }
+
+        return $responseData;
     }
 
     /**
@@ -102,7 +89,7 @@ class Category extends Common
      * @return mixed
      * @throws \Exception
      */
-    public function createItem ($rawData)
+    public function createItem($rawData)
     {
         //extend function
         $object = parent::createItem($rawData);
@@ -132,22 +119,21 @@ class Category extends Common
      * @return mixed
      * @throws \Exception
      */
-    public function updateItem ($id, $rawData)
+    public function updateItem($id, $rawData)
     {
-        //extend function
-        $object = parent::updateItem($id, $rawData);
-
         //generate data value
         $rawDataLocale = $this->_generateRawDataForLocale($rawData);
 
         try {
+            //extend function
+            $object = parent::updateItem($id, $rawData);
+
             //update arrLocale
             $categoryLocale = new CategoryLocale();
 
             $object->locale = $this->_createOrUpdateLocale($categoryLocale, $rawDataLocale, $id);
 
             return $object;
-
         } catch ( \Exception $e) {
             throw $e;
 
@@ -161,7 +147,7 @@ class Category extends Common
      * @return mixed
      * @throws \Exception
      */
-    public function deleteItem ($id)
+    public function deleteItem($id)
     {
         //extend function
         $object = parent::deleteItem($id);
@@ -177,6 +163,5 @@ class Category extends Common
 
         }
     }
-
 
 }

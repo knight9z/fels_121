@@ -24,7 +24,6 @@ class Common extends Model
      */
     public $timestamps = true;
 
-
     /**
      * Don't forget to fill this array
      *
@@ -46,7 +45,6 @@ class Common extends Model
      * @var array
      */
     protected $updateFields = [];
-
 
     /**
      * @var array
@@ -174,7 +172,7 @@ class Common extends Model
      * @param array $fields : the need to get columns
      * @return mixed
      */
-    public function getAll($fields = ['*'], $filter = [])
+    public function getList($fields = ['*'], $filter = [])
     {
         $query = $this->_queryBuild($fields, $filter);
 
@@ -249,7 +247,7 @@ class Common extends Model
             $object = $this::findOrFail($id);
 
             foreach ($this->updateFields as $field) {
-                if (isset($input[$field])) {
+                if (isset($rawData[$field])) {
                     $object->{$field} = $rawData[$field];
 
                 }
@@ -277,8 +275,8 @@ class Common extends Model
     {
         try {
             $object = $this::findOrFail($id);
-            $object->delete();
 
+            $object->delete();
             //TODO : In the classes extend, we can continue process data (if it is necessary) and use soft delete
             return $object;
 

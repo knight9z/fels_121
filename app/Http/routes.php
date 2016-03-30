@@ -44,6 +44,10 @@ Route::group(['middleware' => ['web']], function () {
 
         //manager of user
         Route::resource('user', 'UsersController');
+
+        //manager of category
+        Route::resource('category', 'CategoriesController');
+
     });
 
 });

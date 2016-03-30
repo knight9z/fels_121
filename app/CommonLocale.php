@@ -3,11 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Config;
 
 class CommonLocale extends Model
 {
+    use SoftDeletes;
+
     /**
      * @var code language
      */
@@ -21,7 +23,7 @@ class CommonLocale extends Model
     /**
      * Don't forget to fill this array
      */
-    protected $fillable = [];
+    protected $fillable = ['language_id'];
 
     /**
      * allowed update field
@@ -36,10 +38,8 @@ class CommonLocale extends Model
     public function __construct()
     {
         $this->isoCode = App::getLocale();
-
         $langObject = Language::where('iso_code', $this->isoCode)
-                                    ->first();
-
+                        ->first();
         $this->langId = $langObject->id;
     }
 
@@ -50,10 +50,10 @@ class CommonLocale extends Model
      * @param $conditionField : foreign key of table (Example : category_id, word_answer_id , ...)
      * @return mixed
      */
-    protected function _queryBuild($conditionListId, $conditionField) {
+    protected function _queryBuild($conditionListId, $conditionField)
+    {
         $query = $this::where('language_id', $this->langId)
                     ->whereIn($conditionField, $conditionListId);
-
         return $query;
     }
 
@@ -69,11 +69,10 @@ class CommonLocale extends Model
         //get locale
         $query = $this->_queryBuild([$conditionId], $conditionField);
         $object = $query->first();
-
         if ($object) {
             //action update
             foreach ($this->updateFields as $field) {
-                if (isset($input[$field])) {
+                if (isset($rawData[$field])) {
                     $object->{$field} = $rawData[$field];
                 }
             }
@@ -83,10 +82,8 @@ class CommonLocale extends Model
             // action create
             $rawData['language_id'] = $this->langId;
             $rawData[$conditionField] = $conditionId;
-            $objectResponse = $this::create($rawData);
-
+            $objectResponse = $this->addDataLocale($rawData);
         }
-
 
         return $objectResponse;
     }
@@ -101,7 +98,6 @@ class CommonLocale extends Model
     public function getLocale($conditionId, $conditionField)
     {
         $query = $this->_queryBuild([$conditionId], $conditionField);
-
         return $query->first();
     }
 
@@ -115,7 +111,6 @@ class CommonLocale extends Model
     public function getLocales($conditionListId = [], $conditionField)
     {
         $query = $this->_queryBuild($conditionListId, $conditionField);
-
         return $query->get();
     }
 
@@ -133,7 +128,6 @@ class CommonLocale extends Model
 
         foreach ($objectData as $object) {
             $responseData[$object->$conditionField] = $object;
-
         }
 
         return $responseData;
@@ -149,10 +143,9 @@ class CommonLocale extends Model
      */
     public function deleteWithConditionId($conditionListId, $conditionField)
     {
-
         try {
             //delete all language of item
-            $object = $this::whereIn($conditionField, $conditionListId)
+            $object = $this::where($conditionField, $conditionListId)
                         ->delete();
 
             return $object;
@@ -163,4 +156,18 @@ class CommonLocale extends Model
         }
     }
 
+    /**
+     * @param $rawData
+     * @return $this
+     */
+    public function addDataLocale($rawData)
+    {
+        foreach ($rawData as $key => $value)
+        {
+            $this->{$key} = $value;
+        }
+        $this->save();
+
+        return $this;
+    }
 }
