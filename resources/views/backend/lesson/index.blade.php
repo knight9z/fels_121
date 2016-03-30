@@ -5,7 +5,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">{!! trans('backend/category.title_header') !!}</h1>
+                    <h1 class="page-header">{!! trans('backend/lesson.title_header') !!}</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -20,29 +20,29 @@
                             <table class="table table-striped  table-hover" >
                                 <thead>
                                 <tr>
-                                    <th>{!! trans('backend/category.field.id') !!}</th>
-                                    <th>{!! trans('backend/category.field.image') !!}</th>
-                                    <th>{!! trans('backend/category.field.title') !!}</th>
-                                    <th>{!! trans('backend/category.field.summary') !!}</th>
-                                    <th>{!! trans('backend/category.field.action') !!}</th>
+                                    <th>{!! trans('backend/lesson.field.id') !!}</th>
+                                    <th>{!! trans('backend/lesson.field.category') !!}</th>
+                                    <th>{!! trans('backend/lesson.field.image') !!}</th>
+                                    <th>{!! trans('backend/lesson.field.title') !!}</th>
+                                    <th>{!! trans('backend/lesson.field.action') !!}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($categories as $category)
+                                @foreach ($lessons as $lesson)
                                     <tr class="odd gradeX">
-                                        <td class="center"> {!! $category['id'] !!} </td>
+                                        <td class="center"> {!! $lesson['id'] !!} </td>
+                                        <td class="center"> {!! $lesson['category']['locale']['title'] !!} </td>
                                         <td class="center">
-                                            {!! Html::image(config('constants.path_image') . '/' . $category['image'], null, ['class' => 'avatar'] ) !!}
+                                            {!! Html::image(config('constants.path_image') . '/' . $lesson['category']['image'], null, ['class' => 'avatar']) !!}
                                         </td>
-                                        <td class="center"> {!! $category['locale']['title'] !!} </td>
-                                        <td class="center"> {!! $category['locale']['summary'] !!} </td>
+                                        <td class="center"> {!! $lesson['locale']['title'] !!} </td>
                                         <td class="center">
-                                            {!! link_to('./admin/category/' . $category['id'] . '/edit', trans('backend/category.index.button_edit'), ['class' => 'btn btn-primary btn-xs']) !!}
+                                            {!! link_to('./admin/lesson/' . $lesson['id'] . '/edit', trans('backend/lesson.index.button_edit'), ['class' => 'btn btn-primary btn-xs']) !!}
 
-                                            {!! Form::open(array('url' => 'admin/category/' . $category['id'], 'method' => 'DELETE')) !!}
-                                                <button class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('backend/layout.question_delete') !!}');">
-                                                        <i title="Delete" class="fa fa-trash-o"></i>
-                                                </button>
+                                            {!! Form::open(array('url' => 'admin/lesson/' . $lesson['id'], 'method' => 'DELETE')) !!}
+                                            <button class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('backend/layout.question_delete') !!}');">
+                                                <i title="Delete" class="fa fa-trash-o"></i>
+                                            </button>
                                             {!! Form::close() !!}
                                         </td>
                                     </tr>
@@ -50,17 +50,14 @@
                                 </tbody>
                             </table>
                         </div>
-
                         <!-- /.table-responsive -->
                         <!-- /.panel-body -->
-
                     </div>
                     <!-- /.panel -->
                 </div>
-
                 <!-- pagination -->
                 <div class="row pull-right page-padding">
-                    {!! $categories->links() !!}
+                    {!! $lessons->links() !!}
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

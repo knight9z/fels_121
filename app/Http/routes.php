@@ -48,6 +48,8 @@ Route::group(['middleware' => ['web']], function () {
         //manager of category
         Route::resource('category', 'CategoriesController');
 
+        //manager of lesson
+        Route::resource('lesson', 'LessonsController');
     });
 
 });

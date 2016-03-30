@@ -158,6 +158,7 @@ return [
         App\Providers\CategoryRepositoryServiceProvider::class,
         App\Providers\UserRepositoryProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        App\Providers\LessonRepositoryServiceProvider::class,
 
     ],
 
