@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CategoryLocale extends CommonLocale
 {
@@ -35,6 +36,5 @@ class CategoryLocale extends CommonLocale
      * @var array
      */
     protected $updateFields = ['title', 'summary'];
-
 
 }

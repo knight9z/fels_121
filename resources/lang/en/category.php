@@ -14,7 +14,8 @@ return [
     */
 
     'validate' => [
-        'title' => 'Title is require',
+        'title_require' => 'Title is require',
+        'title_unique' => 'Title is exist',
         'image_require' => 'Image is require',
         'image_mimes' => 'Images must be of the form jpeg,png'
     ],

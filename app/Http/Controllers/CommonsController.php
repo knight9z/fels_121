@@ -7,6 +7,7 @@ use Illuminate\Support\Facades;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class CommonsController extends Controller
 {
@@ -27,7 +28,8 @@ class CommonsController extends Controller
     {
         $this->input = Input::get();
         //set locale for user
-        $lang = Cookie::get('lang', config('constants.default_language'));
+
+        $lang = isset($_COOKIE['lang']) ? $_COOKIE['lang'] : config('constants.default_language');
         App::setLocale($lang);
         //ToDo : we will set $viewFolder in child classes
     }
@@ -49,7 +51,7 @@ class CommonsController extends Controller
     protected function _checkLogin ($viewName = 'create') {
         if (Auth::user()) {
             if (Auth::user()->isAdmin()) {
-                return redirect()->action('AdminController@index');
+                return redirect()->action('AdminsController@index');
             }
 
             return redirect()->action('ClientController@index');
@@ -67,7 +69,7 @@ class CommonsController extends Controller
     {
         $listLang = App\Language::lists('iso_code');
         $isoCode = $listLang->contains($isoCode) ? $isoCode : 'vi';
-        $cookie = cookie()->forever('lang', $isoCode);
+        $cookie = Cookie::forever('lang', $isoCode);
 
         return redirect('/')->withCookie($cookie);
     }

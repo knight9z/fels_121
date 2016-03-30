@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'question_delete' => 'Are you sure ?'
+    'question_delete' => 'Are you sure ?',
+    'message_success' => 'Success !',
 ];

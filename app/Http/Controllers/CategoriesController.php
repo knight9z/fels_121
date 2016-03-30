@@ -1,8 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryUpdateRequest;
 use App\Repositories\Category\CategoryRepositoryInterface;
-use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\CategoryCreateRequest;
+use Illuminate\Support\Facades\Session;
 
 class CategoriesController extends CommonsController
 {
@@ -15,7 +17,7 @@ class CategoriesController extends CommonsController
     {
         parent::__construct();
         $this->categoryRepository = $categoryRepository;
-        $this->viewFolder = 'category';
+        $this->viewFolder = 'backend.category';
     }
 
     /**
@@ -25,9 +27,8 @@ class CategoriesController extends CommonsController
      */
     public function index()
     {
-        $data = $this->categoryRepository->getAllWithPage($this->input);
-        $responseData['result'] = $data;
-        $this->_renderView('index', $responseData);
+        $categories = $this->categoryRepository->getAllWithPage($this->input);
+        return $this->_renderView('index', compact('categories'));
     }
 
     /**
@@ -38,9 +39,8 @@ class CategoriesController extends CommonsController
      */
     public function show($id)
     {
-        $data = $this->categoryRepository->getDetail($id);
-        $responseData['result'] = $data;
-        $this->_renderView('index', $responseData);
+        $category = $this->categoryRepository->getDetail($id);
+        $this->_renderView('index', compact('category'));
     }
 
     /**
@@ -50,17 +50,26 @@ class CategoriesController extends CommonsController
      */
     public function create()
     {
-        $this->_renderView('create');
+        return $this->_renderView('create');
     }
 
     /**
-     * @param CategoryRequest $request
-     * @return mixed
+     * @param CategoryCreateRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(CategoryRequest $request)
+    public function store(CategoryCreateRequest $request)
     {
-        $object = $this->categoryRepository->createItem($request->all());
-        $this->_redirectWithAction('CategoriesController', 'index');
+        $rawData = $request->all();
+        $responseFromRepository = $this->categoryRepository->createItem($request->all());
+
+        if ($responseFromRepository['error']) {
+            return $this->_redirectWithAction('CategoriesController', 'update', $rawData, [$responseFromRepository['message']]);
+
+        } else {
+            Session::flash('success', trans('backend/layout.message_success'));
+            return $this->_redirectWithAction('CategoriesController','index');
+
+        }
     }
 
     /**
@@ -71,20 +80,28 @@ class CategoriesController extends CommonsController
     */
     public function edit($id)
      {
-         $data = $this->categoryRepository->getDetail($id);
-         $responseData['result'] = $data;
-         $this->_renderView('index', $responseData);
+         $category = $this->categoryRepository->getDetail($id);
+         return $this->_renderView('edit', compact('category'));
      }
 
     /**
-     * @param CategoryRequest $request
+     * @param CategoryUpdateRequest $request
      * @param $id
-     * @return mixed
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(CategoryRequest $request, $id)
+    public function update(CategoryUpdateRequest $request, $id)
     {
-        $responseData = $this->categoryRepository->updateItem($id, $request->all());
-        $this->_redirectWithAction('CategoriesController', 'index');
+        $rawData = $request->all();
+        $responseFromRepository = $this->categoryRepository->updateItem($id, $rawData);
+
+        if($responseFromRepository['error']){
+            return $this->_redirectWithAction('CategoriesController', 'update', $rawData, [$responseFromRepository['message']]);
+
+        } else {
+            Session::flash('success', trans('backend/layout.message_success'));
+            return $this->_redirectWithAction('CategoriesController','index');
+
+        }
     }
 
     /**
@@ -96,7 +113,9 @@ class CategoriesController extends CommonsController
     public function destroy($id)
     {
         $this->categoryRepository->deleteItem($id);
-        $this->_redirectWithAction('CategoriesController', 'index');
+        Session::flash('success', trans('backend/layout.message_success'));
+
+        return $this->_redirectWithAction('CategoriesController', 'index');
     }
 
 }

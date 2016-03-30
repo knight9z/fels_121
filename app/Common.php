@@ -249,7 +249,7 @@ class Common extends Model
             $object = $this::findOrFail($id);
 
             foreach ($this->updateFields as $field) {
-                if (isset($input[$field])) {
+                if (isset($rawData[$field])) {
                     $object->{$field} = $rawData[$field];
 
                 }
@@ -275,10 +275,11 @@ class Common extends Model
      */
     public function deleteItem($id)
     {
+
         try {
             $object = $this::findOrFail($id);
-            $object->delete();
 
+            $object->delete();
             //TODO : In the classes extend, we can continue process data (if it is necessary) and use soft delete
             return $object;
 

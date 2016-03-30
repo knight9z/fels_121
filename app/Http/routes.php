@@ -47,6 +47,11 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('user', 'UsersController', array('except' => ['destroy']));
         //remove user
         Route::get('delete/user/{id}', 'UsersController@destroy');
+
+        //manager of category
+        Route::resource('category', 'CategoriesController', array('except' => ['destroy']));
+        //remove category
+        Route::get('delete/category/{id}', 'CategoriesController@destroy');
     });
 
 
