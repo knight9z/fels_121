@@ -12,8 +12,8 @@ class CreateWordAnswerLocalesTable extends Migration
             $table->increments('id');
             $table->integer('language_id')->unsigned();
             $table->integer('word_answer_id')->unsigned();
-            $table->string('content', 255)->default('No data in this language');
-            $table->text('notes');
+            $table->string('content_answer', 255)->default('No data in this language');
+            $table->text('note_answer');
             $table->timestamps();
             $table->softDeletes();
         });

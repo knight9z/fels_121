@@ -4,6 +4,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Log;
 
 class CommonLocale extends Model
 {
@@ -68,6 +69,7 @@ class CommonLocale extends Model
         //get locale
         $query = $this->_queryBuild([$conditionId], $conditionField);
         $object = $query->first();
+
         if ($object) {
             //action update
             foreach ($this->updateFields as $field) {

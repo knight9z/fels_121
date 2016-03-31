@@ -125,7 +125,7 @@ class EloquentRepository
             DB::beginTransaction();
             // Passing all input from the request to create a new Object
             $object = $this->model->deleteItem($id);
-            Log::debug($object);
+
             // commit transaction
             DB::commit();
 

@@ -57,6 +57,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('lesson', 'LessonsController', array('except' => ['destroy']));
         //remove lesson
         Route::get('delete/lesson/{id}', 'LessonsController@destroy');
+
+        //manager of word
+        Route::resource('word', 'WordsController');
+
     });
 
 
