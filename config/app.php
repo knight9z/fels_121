@@ -160,6 +160,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         App\Providers\LessonRepositoryServiceProvider::class,
         App\Providers\WordRepositoryProvider::class,
+        App\Providers\LessonWordRepositoryProvider::class,
 
     ],
 
