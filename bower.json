@@ -24,6 +24,7 @@
   "dependencies": {
     "bootstrap": "^3.3.6",
     "metisMenu": "^2.4.3",
-    "font-awesome": "^4.5.0"
+    "font-awesome": "^4.5.0",
+    "jquery-tokeninput": "^1.7.0"
   }
 }
