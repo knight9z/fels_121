@@ -61,7 +61,11 @@ Route::group(['middleware' => ['web']], function () {
         //manager of word
         Route::resource('word', 'WordsController');
 
+        //add word to lesson
+        Route::controller('lesson/word', 'LessonWordsController');
+
     });
 
-
+    //get json for word
+    Route::get('word/search/{lesson_id}', 'WordsController@searchByLesson');
 });

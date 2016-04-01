@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Common;
 use App\Http\Requests\WordCreateRequest;
 use App\Http\Requests\WordUpdateRequest;
 use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Repositories\Word\WordRepositoryInterface;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
+
 
 class WordsController extends CommonsController
 {
@@ -123,5 +124,15 @@ class WordsController extends CommonsController
         Session::flash('success', trans('backend/layout.message_success'));
 
         return $this->_redirectWithAction('WordsController', 'index');
+    }
+
+
+    public function searchByLesson($lessonId)
+    {
+        $wordKeySearch = Input::get('q');
+
+        $responseFromRepository = $this->wordRepository->searchByLesson($lessonId, $wordKeySearch);
+
+        echo json_encode($responseFromRepository);
     }
 }

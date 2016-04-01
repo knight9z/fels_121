@@ -22,6 +22,9 @@
     <!-- Custom Fonts -->
     <link href="{!! asset('common/bower_components/font-awesome/css/font-awesome.min.css') !!}" rel="stylesheet" type="text/css">
 
+    <!-- token-input  -->
+    {!! Html::style('common/bower_components/jquery-tokeninput/styles/token-input.css') !!}
+
 </head>
 
 <body>
@@ -60,5 +63,10 @@
         }
     });
 </script>
+
+<!-- Custom Theme JavaScript -->
+{!! Html::script('common/bower_components/jquery-tokeninput/src/jquery.tokeninput.js') !!}
+
+@include('layouts.token_input_js')
 
 </html>

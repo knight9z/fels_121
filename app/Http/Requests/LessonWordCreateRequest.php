@@ -24,17 +24,14 @@ class LessonWordCreateRequest extends Request
     public function rules()
     {
         return [
-            'lesson_id'=> 'required|exists:lessons,id',
-            'word_id' => 'required|exists:lessons,id',
+            'word_id' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'category_id.required' => trans('lesson.validate.category_id_require'),
-            'category_id.exists' => trans('lesson.validate.category_id_exists'),
-            'title.required' => trans('lesson.validate.title_require'),
+            'word_id.required' => trans('lesson.validate.word_id_require'),
         ];
     }
 }

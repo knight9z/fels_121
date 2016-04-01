@@ -28,6 +28,13 @@ class Word extends Common
     protected $updateFields = ['category_id', 'content'];
 
     /**
+     * allowed filter field
+     *
+     * @var array
+     */
+    protected $filterFields = ['category_id', 'content'];
+
+    /**
      * relation with table answer
      */
     public function answer()
@@ -155,6 +162,16 @@ class Word extends Common
             throw $e;
 
         }
+    }
+
+    public function searchByCategory($categoryId, $wordKeySearch)
+    {
+        $fields = ['id', 'content as name'];
+        $filter = ['category_id' => $categoryId ];
+        $likeFilter = ['content' => '%'. $wordKeySearch . '%'];
+        $query = $this->_queryBuild($fields, $filter, $likeFilter);
+
+        return $query->get();
     }
 }
 
