@@ -23,9 +23,10 @@ class LessonWordsController extends CommonsController
         $filter = [
             'lesson_id' => $lessonId
         ];
-        $lessonWords = $this->lessonWordRepository->getAllWithPage($filter);
+        $words = $this->lessonWordRepository->getAllWithPage($filter);
 
-        return $this->_renderView('index', compact('lessonWords'));
+        echo json_encode($words);die;
+        return $this->_renderView('index', compact('words'));
     }
 
     public function getAdd($lessonId)
