@@ -52,10 +52,10 @@
                     <a href="#"><i class="fa fa-book fa-fw"></i> Category<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="#">Lists</a>
+                            <a href="{!! url('admin/category') !!}">Lists</a>
                         </li>
                         <li>
-                            <a href="#">Create</a>
+                            <a href="{!! url('admin/category/create') !!}">Create</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
@@ -65,10 +65,10 @@
                     <a href="#"><i class="fa fa-tasks fa-fw"></i> Lesson<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="#">Lists</a>
+                            <a href="{!! url('admin/lesson') !!}">Lists</a>
                         </li>
                         <li>
-                            <a href="#">Create</a>
+                            <a href="{!! url('admin/lesson/create') !!}">Create</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
@@ -78,10 +78,10 @@
                     <a href="#"><i class="fa fa-comments fa-fw"></i> Word <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="#">Lists</a>
+                            <a href="{!! url('admin/word') !!}">Lists</a>
                         </li>
                         <li>
-                            <a href="#">Create</a>
+                            <a href="{!! url('admin/word/create') !!}">Create</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
