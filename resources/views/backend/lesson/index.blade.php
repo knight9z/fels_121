@@ -24,6 +24,8 @@
                                     <th>{!! trans('backend/lesson/index.table.category') !!}</th>
                                     <th>{!! trans('backend/lesson/index.table.image') !!}</th>
                                     <th>{!! trans('backend/lesson/index.table.title') !!}</th>
+                                    <th>{!! trans('backend/lesson/index.table.list_word') !!}</th>
+                                    <th>{!! trans('backend/lesson/index.table.total_word') !!}</th>
                                     <th>{!! trans('backend/lesson/index.table.action') !!}</th>
                                 </tr>
                                 </thead>
@@ -36,7 +38,10 @@
                                             {!! Html::image(config('constants.path_image') . '/' . $lesson['category']['image'], null, ['style' => 'height:50px; width:40px;'] ) !!}
                                         </td>
                                         <td class="center"> {!! $lesson['locale']['title'] !!} </td>
+                                        <td class="center">  {!! link_to('./admin/lesson/word/list/' . $lesson['id'], trans('backend/lesson/index.button_list_word'), ['class' => 'btn btn-danger btn-xs', 'title' => 'List word for lesson']) !!}  </td>
+                                        <td class="center"> {!! $lesson['count_words'] !!} </td>
                                         <td class="center">
+                                            {!! link_to('./admin/lesson/word/add/' . $lesson['id'], trans('backend/lesson/index.button_add_word'), ['class' => 'btn btn-success btn-xs', 'title' => 'Add word for lesson']) !!}
                                             {!! link_to('./admin/lesson/' . $lesson['id'] . '/edit', trans('backend/lesson/index.button_edit'), ['class' => 'btn btn-primary btn-xs']) !!}
                                             <a href="javascript:elearning.confirm_delete('{{ url('./admin/delete/lesson/' . $lesson['id']) }}');" class="btn btn-danger btn-xs"><i title="Delete" class="fa fa-trash-o"></i></a>
                                         </td>

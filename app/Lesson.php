@@ -44,6 +44,10 @@ class Lesson extends Common
      */
     protected $updateFields = ['category_id'];
 
+    public function words()
+    {
+        return $this->hasMany(LessonWord::class);
+    }
     /**
      * get title locale
      *
@@ -90,6 +94,7 @@ class Lesson extends Common
         $lessons = parent::getAllWithPage($filter, $fields, $perPage);
         foreach ($lessons as $lesson){
             $lesson->category;
+            $lesson->count_words = $lesson->words->count();
         }
 
         return $lessons;
