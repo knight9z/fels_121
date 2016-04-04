@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CategoryLocale extends CommonLocale
 {
@@ -20,7 +21,6 @@ class CategoryLocale extends CommonLocale
      */
     public $timestamps = true;
 
-
     /**
      * Don't forget to fill this array
      *
@@ -28,13 +28,11 @@ class CategoryLocale extends CommonLocale
      */
     protected $fillable = ['title', 'summary', 'language_id', 'category_id'];
 
-
     /**
      * allowed update field
      *
      * @var array
      */
     protected $updateFields = ['title', 'summary'];
-
 
 }

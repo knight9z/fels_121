@@ -3,6 +3,7 @@ namespace App\Repositories;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
 
 class EloquentRepository
 {
@@ -40,7 +41,7 @@ class EloquentRepository
      */
     public function getList($filter, $fields = ['*'] )
     {
-        return $this->model->getList ($filter, $fields);
+        return $this->model->getList ($fields, $filter);
     }
 
     /**
@@ -124,6 +125,7 @@ class EloquentRepository
             DB::beginTransaction();
             // Passing all input from the request to create a new Object
             $object = $this->model->deleteItem($id);
+
             // commit transaction
             DB::commit();
 
