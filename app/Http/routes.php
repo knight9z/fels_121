@@ -62,7 +62,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('word', 'WordsController');
 
         //add word to lesson
-        Route::controller('lesson/word', 'LessonWordsController');
+        Route::controller('lesson/detail', 'LessonWordsController');
 
     });
 

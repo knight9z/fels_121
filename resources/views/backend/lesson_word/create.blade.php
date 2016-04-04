@@ -19,10 +19,10 @@
                         <div class="row">
                             <div class="col-lg-10 col-lg-offset-1">
                                 @include('layouts.errors')
-                                    {!! Form::open(array('url' => 'admin/lesson/word/add/'. $lessonId, 'method' => 'POST', 'enctype' => "multipart/form-data")) !!}
+                                    {!! Form::open(array('url' => 'admin/lesson/detail/word/'. $lessonId, 'method' => 'POST', 'enctype' => "multipart/form-data")) !!}
                                     <fieldset>
                                         <div class="form-group">
-                                            <label>{!!  trans('backend/lesson/create.placeholder.title') !!}</label>
+                                            <label>{!!  trans('backend/lesson_word.create.title') !!}</label>
                                             {!! Form::text('word_id', old('word_id'), array('class' => 'form-control', 'id' => 'word_id')) !!}
                                         </div>
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LessonWordCreateRequest;
+use App\Repositories\Lesson\LessonRepositoryInterface;
 use App\Repositories\LessonWord\LessonWordRepositoryInterface;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
@@ -10,11 +11,13 @@ use Illuminate\Support\Facades\Session;
 class LessonWordsController extends CommonsController
 {
     protected $lessonWordRepository;
+    protected $lessonRepository;
 
-    public function __construct(LessonWordRepositoryInterface $lessonWordRepository)
+    public function __construct(LessonWordRepositoryInterface $lessonWordRepository, LessonRepositoryInterface $lessonRepository)
     {
         parent::__construct();
         $this->lessonWordRepository = $lessonWordRepository;
+        $this->lessonRepository = $lessonRepository;
         $this->viewFolder = 'backend.lesson_word';
     }
 
@@ -24,18 +27,18 @@ class LessonWordsController extends CommonsController
             'lesson_id' => $lessonId
         ];
         $words = $this->lessonWordRepository->getAllWithPage($filter);
+        $lesson = $this->lessonRepository->getDetail($lessonId);
 
-        echo json_encode($words);die;
-        return $this->_renderView('index', compact('words'));
+        return $this->_renderView('index', compact('words', 'lesson'));
     }
 
-    public function getAdd($lessonId)
+    public function getWord($lessonId)
     {
         return $this->_renderView('create', compact('lessonId'));
     }
 
 
-    public function postAdd(LessonWordCreateRequest $request, $lessonId)
+    public function postWord(LessonWordCreateRequest $request, $lessonId)
     {
         $rawData = [];
         $wordIdInput = $request->only('word_id');
@@ -48,12 +51,20 @@ class LessonWordsController extends CommonsController
         $responseFromRepository = $this->lessonWordRepository->createItem($rawData);
 
         if(isset($responseFromRepository['error']) && $responseFromRepository['error']){
-            return $this->_redirectPage('/admin/lesson/word/add/'. $lessonId, $rawData, [$responseFromRepository['message']]);
+            return $this->_redirectPage('/admin/lesson/detail/word/'. $lessonId, $rawData, [$responseFromRepository['message']]);
 
         } else {
             Session::flash('success', trans('backend/layout.message_success'));
-            return $this->_redirectPage('/admin/lesson/word/list/'. $lessonId);
+            return $this->_redirectPage('/admin/lesson/detail/list/'. $lessonId);
 
         }
+    }
+
+    public function deleteWord($lessonWordId, $lessonId)
+    {
+        $this->lessonWordRepository->deleteItem($lessonWordId);
+        Session::flash('success', trans('backend/layout.message_success'));
+
+        return $this->_redirectPage('/admin/lesson/detail/list/' . $lessonId);
     }
 }

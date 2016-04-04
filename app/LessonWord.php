@@ -23,7 +23,10 @@ class LessonWord extends Common
     /**
      * @var array
      */
-    protected $updateFields = ['lesson_id', 'word_id'];
+    protected $updateFields = ['lesson_id1', 'word_id'];
+
+
+    protected $filterFields = ['lesson_id', 'word_id'];
 
     /**
      *
@@ -38,7 +41,7 @@ class LessonWord extends Common
     {
         $data = parent::getAllWithPage($filter, $fields, $perPage);
         foreach ($data as $item) {
-            $item->words;
+            $item->words->answer;
         }
 
         return $data;
