@@ -16,6 +16,7 @@ class CreateUsersTable extends Migration
             $table->string('avatar');
             $table->tinyInteger('role');
             $table->smallInteger('percent_skill')->default('0');
+            $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
         });
