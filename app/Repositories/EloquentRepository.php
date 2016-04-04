@@ -123,7 +123,7 @@ class EloquentRepository
             //start transaction
             DB::beginTransaction();
             // Passing all input from the request to create a new Object
-            $object = $this->model->destroy($id);
+            $object = $this->model->deleteItem($id);
             // commit transaction
             DB::commit();
 

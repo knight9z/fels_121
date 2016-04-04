@@ -34,13 +34,13 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a href="#"><i class="fa fa-users fa-fw"></i> {!! trans('backend/layout.menu.user') !!} <span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-users fa-fw"></i> User<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            {!! link_to('#', trans('backend/layout.menu_action.list') ) !!}
+                             {!! link_to('admin/user', 'Lists') !!}
                         </li>
                         <li>
-                            {!! link_to('#', trans('backend/layout.menu_action.create') ) !!}
+                            {!! link_to('admin/user/create', 'Create') !!}
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->

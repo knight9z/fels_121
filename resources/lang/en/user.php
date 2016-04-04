@@ -43,5 +43,12 @@ return [
             'password_repeat_required' => 'Require password repeat'
         ],
     ],
+    'destroy' => [
+        'remove_mine' => 'You can not remove yourself '
+    ],
+    'role' => [
+        'admin' => 'Admin',
+        'member' => 'Member',
+    ]
 
 ];
