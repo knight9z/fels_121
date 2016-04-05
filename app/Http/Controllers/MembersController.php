@@ -2,9 +2,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MemberCreateRequest;
-use App\Http\Requests\MemberUpdateRequest;
 use App\Repositories\User\UserRepositoryInterface;
 use App\User;
+use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 
@@ -96,10 +96,8 @@ class MembersController extends CommonsController
     public function edit($id)
     {
         $currentUser = Auth::user();
-
         if($currentUser->id != $id) {
             return $this->_redirectWithAction('ClientsController','index');
-
         }
         $user = $this->userRepository->getDetail($id);
         return $this->_renderView('edit', compact('user', 'currentUser'));
@@ -117,11 +115,9 @@ class MembersController extends CommonsController
         $rawData = $request->all();
         $responseFromRepository = $this->userRepository->updateItem($id, $rawData);
         if($responseFromRepository['error']){
-            return $this->_redirectWithAction('MembersController' ,'edit', $rawData, [$responseFromRepository['message']]);
-
+            return back()->withErrors([$responseFromRepository['message']])->withInput($rawData);
         } else {
             return $this->_redirectWithAction('ClientsController','index');
-
         }
     }
 }
