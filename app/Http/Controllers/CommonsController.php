@@ -54,7 +54,7 @@ class CommonsController extends Controller
                 return redirect()->action('AdminsController@index');
             }
 
-            return redirect()->action('ClientController@index');
+            return redirect()->action('ClientsController@index');
         }
 
         return view($this->viewFolder . '.' . $viewName);

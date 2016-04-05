@@ -2,9 +2,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MemberCreateRequest;
+use App\Http\Requests\MemberUpdateRequest;
 use App\Repositories\User\UserRepositoryInterface;
-use Illuminate\Http\Request;
+use App\User;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 
 class MembersController extends CommonsController
 {
@@ -18,10 +20,10 @@ class MembersController extends CommonsController
      * SessionController constructor.
      * @param UserRepositoryInterface $user
      */
-    public function __construct(UserRepositoryInterface $user)
+    public function __construct(UserRepositoryInterface $userRepository)
     {
         parent::__construct();
-        $this->userRepository = $user;
+        $this->userRepository = $userRepository;
         $this->viewFolder = 'frontend.member';
     }
 
@@ -32,7 +34,14 @@ class MembersController extends CommonsController
      */
     public function index()
     {
-        //
+        $currentUser = Auth::user();
+
+        $filter = [
+            'role' => User::USER_ROLE_MEMBER,
+        ];
+        $users = $this->userRepository->getAllWithPage($filter);
+
+        return $this->_renderView('index', compact('users', 'currentUser'));
     }
 
     /**
@@ -73,7 +82,9 @@ class MembersController extends CommonsController
      */
     public function show($id)
     {
-        //
+        $currentUser = Auth::user();
+        $user = $this->userRepository->getDetail($id);
+        return $this->_renderView('detail', compact('user', 'currentUser'));
     }
 
     /**
@@ -84,7 +95,14 @@ class MembersController extends CommonsController
      */
     public function edit($id)
     {
-        //
+        $currentUser = Auth::user();
+
+        if($currentUser->id != $id) {
+            return $this->_redirectWithAction('ClientsController','index');
+
+        }
+        $user = $this->userRepository->getDetail($id);
+        return $this->_renderView('edit', compact('user', 'currentUser'));
     }
 
     /**
@@ -94,19 +112,16 @@ class MembersController extends CommonsController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MemberUpdateRequest $request, $id)
     {
-        //
-    }
+        $rawData = $request->all();
+        $responseFromRepository = $this->userRepository->updateItem($id, $rawData);
+        if($responseFromRepository['error']){
+            return $this->_redirectWithAction('MembersController' ,'edit', $rawData, [$responseFromRepository['message']]);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        } else {
+            return $this->_redirectWithAction('ClientsController','index');
+
+        }
     }
 }
