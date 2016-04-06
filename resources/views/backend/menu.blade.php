@@ -53,6 +53,7 @@
                         </li>
                         <li>
                             {!! link_to('admin/category/create', trans('backend/layout.menu_action.create')) !!}
+
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
@@ -62,10 +63,10 @@
                     <a href="#"><i class="fa fa-tasks fa-fw"></i> {!! trans('backend/layout.menu.lesson') !!} <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            {!! link_to('#', trans('backend/layout.menu_action.list')) !!}
+                            {!! link_to('admin/lesson', trans('backend/layout.menu_action.list')) !!}
                         </li>
                         <li>
-                            {!! link_to('#', trans('backend/layout.menu_action.create')) !!}
+                            {!! link_to('admin/lesson/create', trans('backend/layout.menu_action.create')) !!}
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
@@ -75,10 +76,10 @@
                     <a href="#"><i class="fa fa-comments fa-fw"></i> {!! trans('backend/layout.menu.word') !!}  <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            {!! link_to('#', trans('backend/layout.menu_action.list')) !!}
+                            {!! link_to('admin/word', trans('backend/layout.menu_action.list')) !!}
                         </li>
                         <li>
-                            {!! link_to('#', trans('backend/layout.menu_action.create')) !!}
+                            {!! link_to('admin/word/create', trans('backend/layout.menu_action.create')) !!}
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
