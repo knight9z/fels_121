@@ -39,7 +39,7 @@ class EloquentRepository
      * @param array $fields
      * @return mixed
      */
-    public function getList($filter, $fields = ['*'] )
+    public function getList($filter = [], $fields = ['*'] )
     {
         return $this->model->getList ($fields, $filter);
     }
@@ -50,7 +50,7 @@ class EloquentRepository
      * @param $perPage
      * @return mixed
      */
-    public function getAllWithPage($filter, $fields = ['*'], $perPage = 15)
+    public function getAllWithPage($filter = [], $fields = ['*'], $perPage = 15)
     {
         return $this->model->getAllWithPage ($filter, $fields, $perPage);
     }
