@@ -4,7 +4,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">{!! trans('backend/category/index.header_title') !!}</h1>
+                    <h1 class="page-header">{!! trans('backend/category.title_header') !!}</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -19,10 +19,10 @@
                             <table class="table table-striped  table-hover" >
                                 <thead>
                                 <tr>
-                                    <th>{!! trans('backend/category/index.table.id') !!}</th>
-                                    <th>{!! trans('backend/category/index.table.image') !!}</th>
-                                    <th>{!! trans('backend/category/index.table.title') !!}</th>
-                                    <th>{!! trans('backend/category/index.table.summary') !!}</th>
+                                    <th>{!! trans('backend/category.field.id') !!}</th>
+                                    <th>{!! trans('backend/category.field.image') !!}</th>
+                                    <th>{!! trans('backend/category.field.title') !!}</th>
+                                    <th>{!! trans('backend/category.field.summary') !!}</th>
                                     <th>Lesson</th>
                                 </tr>
                                 </thead>
@@ -36,7 +36,7 @@
                                         <td class="center"> {!! $category['locale']['title'] !!} </td>
                                         <td class="center"> {!! $category['locale']['summary'] !!} </td>
                                         <td class="center">
-                                            {!! link_to('#', 'View Lesson', ['class' => 'btn btn-primary btn-xs']) !!}
+                                            {!! link_to('#', trans('frontend/layout.child.category.view_lesson'), ['class' => 'btn btn-primary btn-xs']) !!}
                                         </td>
                                     </tr>
                                 @endforeach

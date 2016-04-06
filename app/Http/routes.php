@@ -69,6 +69,8 @@ Route::group(['middleware' => ['web']], function () {
 
         //manager of user
         Route::resource('member', 'MembersController', array('except' => ['destroy', 'create', 'store']));
+
+        Route::get('category', 'ClientsController@category');
     });
 
 });

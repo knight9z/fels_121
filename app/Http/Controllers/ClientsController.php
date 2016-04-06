@@ -11,10 +11,14 @@ use Illuminate\Support\Facades\Auth;
 
 class ClientsController extends CommonsController
 {
-    public function __construct()
+
+    protected $categoryRepository;
+
+    public function __construct(CategoryRepositoryInterface $categoryRepository)
     {
         parent::__construct();
         $this->viewFolder = 'frontend';
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -27,4 +31,12 @@ class ClientsController extends CommonsController
        $currentUser = $this->currentUser;
        return $this->_renderView('index', compact('currentUser'));
     }
+
+    public function category()
+    {
+        $currentUser = $this->currentUser;
+        $categories = $this->categoryRepository->getAllWithPage($this->input);
+        return $this->_renderView('category.index', compact('categories', 'currentUser'));
+    }
+
 }
