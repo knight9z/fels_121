@@ -14,11 +14,11 @@
         <section class="stats">
             <div class="stats">
                 <a href="#" class="btn btn-success btn-xs">
-                    <strong id="following" class="stat">0</strong>
+                    <strong id="following" class="stat">{!! count($currentUser['following']) !!}</strong>
                     {!! trans('frontend/layout.user.following') !!}
                 </a>
                 <a href="#" class="btn btn-primary btn-xs">
-                    <strong id="followers" class="stat">2</strong>
+                    <strong id="followers" class="stat">{!! count($currentUser['follower']) !!}</strong>
                     {!! trans('frontend/layout.user.follower') !!}
                 </a>
             </div>

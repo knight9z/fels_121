@@ -29,6 +29,16 @@ class User extends Authenticatable
      */
     protected $filterFields = ['id', 'email', 'name', 'role'];
 
+
+    public function follower()
+    {
+        return $this->hasMany(Relationship::class, 'follower_id', 'id');
+    }
+
+    public function following()
+    {
+        return $this->hasMany(Relationship::class, 'following_id', 'id');
+    }
     /**
      * build query
      * @param array $fields
