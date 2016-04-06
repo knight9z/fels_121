@@ -31,12 +31,12 @@
                                     <tr class="odd gradeX">
                                         <td class="center"> {!! $category['id'] !!} </td>
                                         <td class="center">
-                                            {!! Html::image(config('constants.path_image') . '/' . $category['image'], null, ['style' => 'height:50px; width:40px;'] ) !!}
+                                            {!! Html::image(config('constants.path_image') . '/' . $category['image'], null, ['style' => 'height:50px; width:40px;', 'class' => 'avatar'] ) !!}
                                         </td>
                                         <td class="center"> {!! $category['locale']['title'] !!} </td>
                                         <td class="center"> {!! $category['locale']['summary'] !!} </td>
                                         <td class="center">
-                                            {!! link_to('#', 'View Lesson', ['class' => 'btn btn-primary btn-xs']) !!}
+                                            {!! link_to('#', trans('frontend/layout.child.category.view_lesson'), ['class' => 'btn btn-primary btn-xs']) !!}
                                         </td>
                                     </tr>
                                 @endforeach

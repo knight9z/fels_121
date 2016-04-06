@@ -10,5 +10,8 @@ return [
         'profile' => 'Profile',
         'following' => 'Following',
         'follower' => 'Follower',
+    ],
+    'child' => [
+        'category' => ['view_lesson' => 'View Lesson']
     ]
 ];

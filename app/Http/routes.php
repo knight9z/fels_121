@@ -78,5 +78,7 @@ Route::group(['middleware' => ['web']], function () {
 
         //manager of user
         Route::resource('relationship', 'RelationshipsController', ['only' => ['store', 'destroy']]);
+
+        Route::get('category', 'ClientsController@category');
     });
 });
