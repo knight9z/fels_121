@@ -80,5 +80,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('relationship', 'RelationshipsController', ['only' => ['store', 'destroy']]);
 
         Route::get('category', 'ClientsController@category');
+
+        Route::get('lesson/{category_id}', 'ClientsController@lesson');
     });
 });

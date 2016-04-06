@@ -12,6 +12,7 @@ return [
         'follower' => 'Follower',
     ],
     'child' => [
-        'category' => ['view_lesson' => 'View Lesson']
+        'category' => ['view_lesson' => 'View Lesson'],
+        'lesson' => ['button' => 'Start Lesson'],
     ]
 ];

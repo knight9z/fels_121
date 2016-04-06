@@ -24,7 +24,7 @@
                                     <th>{!! trans('backend/lesson/index.table.image') !!}</th>
                                     <th>{!! trans('backend/lesson/index.table.title') !!}</th>
                                     <th>{!! trans('backend/lesson/index.table.total_word') !!}</th>
-                                    <th>Start Lesson</th>
+                                    <th>{!! trans('frontend/layout.child.lesson.button') !!}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -33,12 +33,20 @@
                                         <td class="center"> {!! $lesson['id'] !!} </td>
                                         <td class="center"> {!! $lesson['category']['locale']['title'] !!} </td>
                                         <td class="center">
-                                            {!! Html::image(config('constants.path_image') . '/' . $lesson['category']['image'], null, ['style' => 'height:50px; width:40px;'] ) !!}
+                                            {!! Html::image(config('constants.path_image') . '/' . $lesson['category']['image'], null, ['style' => 'height:50px; width:40px;', 'class' => 'avatar'] ) !!}
                                         </td>
                                         <td class="center"> {!! $lesson['locale']['title'] !!} </td>
                                         <td class="center"> {!! $lesson['count_words'] !!} </td>
                                         <td class="center">
-                                            {!! link_to('#', 'start', ['class' => 'btn btn-success btn-xs', 'title' => 'Start Lesson']) !!}
+
+                                            {!! Form::open(array('url' => 'client/start/lesson/' . $lesson['id'], 'method' => 'POST')) !!}
+                                                {!! Form::hidden('user_id', $currentUser['id'], array('class' => 'form-control')) !!}
+                                                {!! Form::hidden('lesson_id', $lesson['id'], array('class' => 'form-control')) !!}
+                                                <button class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('backend/layout.question_delete') !!}');">
+                                                    {!! trans('frontend/layout.child.lesson.button') !!}
+                                                </button>
+                                            {!! Form::close() !!}
+
                                         </td>
                                     </tr>
                                 @endforeach
