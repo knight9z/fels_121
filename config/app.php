@@ -161,6 +161,8 @@ return [
         App\Providers\LessonRepositoryServiceProvider::class,
         App\Providers\WordRepositoryProvider::class,
         App\Providers\LessonWordRepositoryProvider::class,
+        App\Providers\RelationshipRepositoryProvider::class,
+
     ],
 
     /*

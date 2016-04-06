@@ -69,6 +69,9 @@ Route::group(['middleware' => ['web']], function () {
 
         //manager of user
         Route::resource('member', 'MembersController', array('except' => ['destroy', 'create', 'store']));
+
+        //manager of user
+        Route::resource('relationship', 'RelationshipsController', ['only' => ['store', 'destroy']]);
     });
 
 });

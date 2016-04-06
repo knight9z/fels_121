@@ -3,10 +3,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MemberCreateRequest;
 use App\Http\Requests\MemberUpdateRequest;
+use App\Repositories\Relationship\RelationshipRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
 use App\User;
 use App\Http\Requests;
-use Illuminate\Support\Facades\Auth;
 
 class MembersController extends CommonsController
 {
@@ -15,15 +15,17 @@ class MembersController extends CommonsController
      * @var UserRepoInterface
      */
     protected $userRepository;
+    protected $relationshipRepository;
 
     /**
      * SessionController constructor.
      * @param UserRepositoryInterface $userRepository
      */
-    public function __construct(UserRepositoryInterface $userRepository)
+    public function __construct(UserRepositoryInterface $userRepository, RelationshipRepositoryInterface $relationshipRepository)
     {
         parent::__construct();
         $this->userRepository = $userRepository;
+        $this->relationshipRepository = $relationshipRepository;
         $this->viewFolder = 'frontend.member';
     }
 
@@ -81,8 +83,17 @@ class MembersController extends CommonsController
     public function show($id)
     {
         $currentUser = $this->currentUser;
+        $currentUser->relationship_id = 0;
+
+        foreach ($currentUser->follower as $relation) {
+            if ($relation->following_id == $id) {
+                $currentUser->relationship_id = $relation->id;
+                break;
+            }
+        }
+
         $user = $this->userRepository->getDetail($id);
-        return $this->_renderView('detail', compact('user', 'currentUser'));
+        return $this->_renderView('detail', compact('user', 'currentUser', 'listMemberCurrentUserFollow'));
     }
 
     /**
