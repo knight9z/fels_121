@@ -36,7 +36,7 @@
                                         <td class="center"> {!! $category['locale']['title'] !!} </td>
                                         <td class="center"> {!! $category['locale']['summary'] !!} </td>
                                         <td class="center">
-                                            {!! link_to('#', trans('frontend/layout.child.category.view_lesson'), ['class' => 'btn btn-primary btn-xs']) !!}
+                                            {!! link_to('/client/lesson/' . $category['id'], trans('frontend/layout.child.category.view_lesson'), ['class' => 'btn btn-primary btn-xs']) !!}
                                         </td>
                                     </tr>
                                 @endforeach
