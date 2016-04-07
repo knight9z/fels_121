@@ -50,6 +50,10 @@ Route::group(['middleware' => ['web']], function () {
 
         //manager of lesson
         Route::resource('lesson', 'LessonsController');
+
+        //manager of word
+        Route::resource('word', 'WordsController');
+
     });
 
 });
