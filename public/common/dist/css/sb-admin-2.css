@@ -357,3 +357,13 @@ table.dataTable thead .sorting:after {
     height:50px;
     width:40px;
 }
+
+.gravatar{
+    float: left;
+    margin-right: 10px;
+}
+
+.gravatar image{
+    float: left;
+    margin-right: 10px;
+}
