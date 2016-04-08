@@ -73,13 +73,21 @@ class Common extends Model
         $query = $this::select($fields);
 
         foreach ($this->filterFields as $field) {
-            if (isset($filter[$field])) {
+            if (isset($filter[$field]) && $filter[$field]) {
                 $query = $query->where($field, $filter[$field]);
             }
 
             if (isset($likeFilter[$field])) {
                 $query = $query->where($field, 'LIKE',$likeFilter[$field]);
             }
+        }
+
+        if (isset($filter['whereNotIn'])) {
+            $query = $query->whereNotIn($filter['whereNotIn']['field'], $filter['whereNotIn']['value']);
+        }
+
+        if (isset($filter['whereIn'])) {
+            $query = $query->whereIn($filter['whereIn']['field'], $filter['whereIn']['value']);
         }
 
         $query = $query->orderBy($orderBy, 'DESC');

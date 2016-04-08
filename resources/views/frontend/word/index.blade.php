@@ -21,17 +21,17 @@
                             <div class="row">
                                 <div class="col-lg-10 col-lg-offset-1">
                                     @include('layouts.errors')
-                                    {!! Form::open(array('url' => 'admin/lesson/', 'method' => 'GET', 'enctype' => "multipart/form-data")) !!}
+                                    {!! Form::open(array('url' => 'client/word', 'method' => 'GET', 'enctype' => "multipart/form-data")) !!}
                                         <fieldset>
 
                                             <div class="form-group">
                                                 <label>{!!  trans('backend/lesson/create.placeholder.category') !!}</label>
-                                                {!! Form::select('category_id', $categories, old('category_id'), array('class' => 'form-control')) !!}
+                                                {!! Form::select('category_id', $categories, $oldData['category_id'], array('class' => 'form-control')) !!}
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Status</label>
-                                                {!! Form::select('is_reader', $isReadWords, old('is_reader'), array('class' => 'form-control')) !!}
+                                                {!! Form::select('is_reader', $isReadWords, $oldData['is_reader'], array('class' => 'form-control')) !!}
                                             </div>
 
                                             <!-- Change this to a button or input when using this as a form -->

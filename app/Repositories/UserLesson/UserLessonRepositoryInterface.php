@@ -10,4 +10,5 @@ interface UserLessonRepositoryInterface
     public function updateItem ($id, $rawData);
     public function createItem ($rawData);
     public function deleteItem ($id);
+    public function getListWordCorrectAnswer($userId);
 }

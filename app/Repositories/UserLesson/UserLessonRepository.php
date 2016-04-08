@@ -11,4 +11,21 @@ class UserLessonRepository extends EloquentRepository implements UserLessonRepos
     {
         $this->model = $userLesson;
     }
+
+    public function getListWordCorrectAnswer($userId)
+    {
+        $listWord = [];
+        $filter = ['user_id' => $userId];
+        $userLessons = $this->getList($filter);
+
+        foreach ($userLessons as $userLesson) {
+            foreach ($userLesson->result as $result) {
+                if ($result->is_correct) {
+                    $listWord[] = $result->word_id;
+                }
+            }
+        }
+
+        return $listWord;
+    }
 }
