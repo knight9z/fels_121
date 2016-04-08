@@ -30,6 +30,10 @@ class UserLesson extends Common
      */
     protected $filterFields = ['user_id', 'lesson_id', 'total_correct'];
 
+    public function lesson()
+    {
+        return $this->belongsTo(Lesson::class);
+    }
 
     public function result()
     {
