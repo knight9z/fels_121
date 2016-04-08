@@ -164,6 +164,7 @@ return [
         App\Providers\RelationshipRepositoryProvider::class,
         App\Providers\UserLessonRepositoryProvider::class,
         App\Providers\WordAnswerRepositoryProvider::class,
+        App\Providers\ActivityRepositoryProvider::class,
 
     ],
 

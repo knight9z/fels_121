@@ -82,7 +82,7 @@ class Common extends Model
             }
         }
 
-        $query = $query->orderBy($orderBy);
+        $query = $query->orderBy($orderBy, 'DESC');
 
         return $query;
     }

@@ -75,6 +75,8 @@ class UserLesson extends Common
             }
             $object->result = $result;
 
+            Activity::create( ['user_id' => $object->user_id, 'user_lesson_id' => $object->id]);
+
             return $object;
 
         } catch (Exception $e) {

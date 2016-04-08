@@ -72,40 +72,23 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-
+            @foreach ($activities as $activity)
             <div class="row">
                 <div class="col-md-4">
                     <li>
-                        <img alt="Admin" class="gravatar" src="https://secure.gravatar.com/avatar/75d23af433e0cea4c0e45a56dba18b30?s=80">
-                        <a href="/users/1">Admin</a>
+                        {!! Html::image(config('constants.path_image') . '/' . $activity->user['avatar'], null, ['style' => 'height:80px; width:80px;', 'class' => 'gravatar'] ) !!}
+                        <h3>{!! $activity->user['name'] !!}</h3>
                     </li>
-
                 </div>
                 <div class="col-md-7">
-                    Unfollowed
-                    User-3
-                    -(03/18/2016)
+                    Complete Lesson {!! $activity->user_lesson->lesson->locale['title'] !!}
                 </div>
             </div>
 
             <div class="col-lg-12">
                 <h1 class="page-header"></h1>
             </div>
-
-            <div class="row">
-                <div class="col-md-4">
-                    <li>
-                        <img alt="Admin" class="gravatar" src="https://secure.gravatar.com/avatar/75d23af433e0cea4c0e45a56dba18b30?s=80">
-                        <a href="/users/1">Admin</a>
-                    </li>
-
-                </div>
-                <div class="col-md-7">
-                    Unfollowed
-                    User-3
-                    -(03/18/2016)
-                </div>
-            </div>
+            @endforeach
         </div>
 
         <!-- /#page-wrapper -->
