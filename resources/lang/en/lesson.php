@@ -19,5 +19,13 @@ return [
         'category_id_require' => 'Category is require'
     ],
 
+    'lesson_word' => [
+        'result' => [
+            'word' => 'Word',
+            'answer' => 'Answer',
+            'correct' => 'Word',
+            'result' => 'Result',
+        ]
+    ],
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 ];

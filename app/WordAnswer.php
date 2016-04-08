@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class WordAnswer extends Common
@@ -120,5 +121,20 @@ class WordAnswer extends Common
             throw $e;
 
         }
+    }
+
+    public function getRandomWordAnswer($correctAnswerId)
+    {
+        $listWrongId = $this::orderBy(DB::raw('RAND()'))
+                        ->where('id', '!=', $correctAnswerId)
+                        ->take(config('constants.count_answer_wrong'))
+                        ->lists('id');
+        $responseData = [];
+
+        foreach ($listWrongId as $stt => $id) {
+            $responseData['word_answer_wrong_id_'. ($stt + 1)] = $id;
+        }
+
+        return $responseData;
     }
 }

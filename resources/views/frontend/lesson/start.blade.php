@@ -21,57 +21,49 @@
                             <div class="row">
                                 <div class="col-lg-10 col-lg-offset-1">
                                     @include('layouts.errors')
-                                    {!! Form::open(array('url' => '#', 'method' => 'GET', 'enctype' => "multipart/form-data")) !!}
-                                    <fieldset>
+                                    {!! Form::open(array('url' => '/client/start/lesson/'. $userLesson->id, 'method' => 'PUT', 'enctype' => "multipart/form-data")) !!}
+                                        {!! Form::hidden('user_id', $currentUser['id'], array('class' => 'form-control')) !!}
+                                        {!! Form::hidden('lesson_id', $userLesson['lesson_id'], array('class' => 'form-control')) !!}
+                                        <fieldset>
+                                            @foreach ($userLesson->result as $number => $question)
+                                            <div class="col-md-6 col-md-offset-3">
+                                                <li>
+                                                    <h4> {!! $question->word->content !!}</h4>
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                            <input type="radio" value="{!! $question->word_answer_wrong_id_1 !!}" name="result[{!! $question->id !!}]" id="result_{!! $question->id !!}">
 
-                                        <div class="col-md-6 col-md-offset-3">
-                                            <li>
-                                                <h4>esgegs</h4>
-                                                <div class="row">
-                                                    <div class="col-md-1">
-                                                        <input type="radio" value="18" name="lesson[word_lessons_attributes][0][answer_id]" id="lesson_word_lessons_attributes_0_answer_id_18">
+                                                        </div>
+                                                        {!! $question->wrongAnswer1->content_answer !!}
                                                     </div>
-                                                    <div class="col-md-2">
-                                                        dsfsdfs
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-1">
-                                                        <input type="radio" value="19" name="lesson[word_lessons_attributes][0][answer_id]" id="lesson_word_lessons_attributes_0_answer_id_19">
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        sdfdfdsf
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </div>
 
-                                        <div class="col-md-6 col-md-offset-3">
-                                            <li>
-                                                <h4>esgegs</h4>
-                                                <div class="row">
-                                                    <div class="col-md-1">
-                                                        <input type="radio" value="18" name="lesson[word_lessons_attributes][0][answer_id]" id="lesson_word_lessons_attributes_0_answer_id_18">
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                            <input type="radio" value="{!! $question->word_answer_wrong_id_2 !!}" name="result[{!! $question->id !!}]" id="result_{!! $question->id !!}">
+                                                        </div>
+                                                        {!! $question->wrongAnswer2->content_answer !!}
                                                     </div>
-                                                    <div class="col-md-2">
-                                                        dsfsdfs
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-1">
-                                                        <input type="radio" value="19" name="lesson[word_lessons_attributes][0][answer_id]" id="lesson_word_lessons_attributes_0_answer_id_19">
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        sdfdfdsf
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </div>
 
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                            <input type="radio" value="{!! $question->word_answer_wrong_id_3 !!}" name="result[{!! $question->id !!}]" id="result_{!! $question->id !!}">
+                                                        </div>
+                                                        {!! $question->wrongAnswer3->content_answer !!}
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                            <input type="radio" value="{!! $question->word_answer_correct_id !!}" name="result[{!! $question->id !!}]" id="result_{!! $question->id !!}">
+                                                        </div>
+                                                        {!! $question->correctAnswer->content_answer !!}
+                                                    </div>
+
+                                                </li>
+                                            </div>
+                                            @endforeach
+                                        </fieldset>
                                         <!-- Change this to a button or input when using this as a form -->
                                         {!! Form::submit(trans('backend/lesson/create.button'), ['class' => 'btn btn-primary']) !!}
-
-                                    </fieldset>
                                     {!! Form::close() !!}
                                 </div>
                             </div>

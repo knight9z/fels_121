@@ -39,7 +39,7 @@
                                         <td class="center"> {!! $lesson['count_words'] !!} </td>
                                         <td class="center">
 
-                                            {!! Form::open(array('url' => 'client/start/lesson/' . $lesson['id'], 'method' => 'POST')) !!}
+                                            {!! Form::open(array('url' => 'client/start/lesson', 'method' => 'POST')) !!}
                                                 {!! Form::hidden('user_id', $currentUser['id'], array('class' => 'form-control')) !!}
                                                 {!! Form::hidden('lesson_id', $lesson['id'], array('class' => 'form-control')) !!}
                                                 <button class="btn btn-danger btn-xs" onclick="return confirm('{!! trans('backend/layout.question_delete') !!}');">

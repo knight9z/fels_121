@@ -162,6 +162,8 @@ return [
         App\Providers\WordRepositoryProvider::class,
         App\Providers\LessonWordRepositoryProvider::class,
         App\Providers\RelationshipRepositoryProvider::class,
+        App\Providers\UserLessonRepositoryProvider::class,
+        App\Providers\WordAnswerRepositoryProvider::class,
 
     ],
 

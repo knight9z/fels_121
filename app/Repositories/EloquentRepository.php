@@ -50,7 +50,7 @@ class EloquentRepository
      * @param $perPage
      * @return mixed
      */
-    public function getAllWithPage($filter, $fields = ['*'], $perPage = 15)
+    public function getAllWithPage($filter = [], $fields = ['*'], $perPage = 15)
     {
         return $this->model->getAllWithPage ($filter, $fields, $perPage);
     }
@@ -80,12 +80,12 @@ class EloquentRepository
             // commit transaction
             DB::commit();
 
-            return $object;
+            return ['error' => false, 'data' => $object];
 
         } catch (\Exception $e){
             DB::rollBack();
-            throw $e;
-            //TODO : we wil process in handle exception.
+            Log::debug($e);
+            return ['error' => true, 'message' => $e->getMessage()];
         }
     }
 
@@ -104,12 +104,10 @@ class EloquentRepository
             // commit transaction
             DB::commit();
 
-            return $object;
-
+            return ['error' => false, 'data' => $object];
         } catch (\Exception $e){
             DB::rollBack();
-            throw $e;
-            //TODO : we wil process in handle exception.
+            return ['error' => true, 'message' => $e->getMessage()];
         }
     }
 

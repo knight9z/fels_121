@@ -4,7 +4,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header"> Lesson Result 1/2</h1>
+                    <h1 class="page-header"> Lesson Result</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -19,54 +19,34 @@
                             <table class="table table-striped  table-hover" >
                                 <thead>
                                 <tr>
-                                    <th>STT</th>
-                                    <th>Word</th>
-                                    <th>Answer</th>
-                                    <th>Correct</th>
-                                    <th>Result</th>
+                                    <th>{!! trans('lesson.lesson_word.result.word') !!}</th>
+                                    <th>{!! trans('lesson.lesson_word.result.word') !!}Answer</th>
+                                    <th>{!! trans('lesson.lesson_word.result.word') !!}Correct</th>
+                                    <th>{!! trans('lesson.lesson_word.result.word') !!}Result</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="odd gradeX danger">
-                                        <td class="center"> 1</td>
-                                        <td class="center"> Hello </td>
-                                        <td class="center">
-                                           Chào
-                                        </td>
-                                        <td class="center"> Tạm biệt </td>
-                                        <td class="center">
-                                            {!! link_to('#', 'TRUE', ['class' => 'btn btn-success btn-xs', 'title' => 'Start Lesson']) !!}
-                                            {!! link_to('#', 'FALSE', ['class' => 'btn btn-danger btn-xs', 'title' => 'Start Lesson']) !!}
-                                        </td>
-                                    </tr>
-
-                                    <tr class="odd gradeX success">
-                                        <td class="center"> 1</td>
-                                        <td class="center"> Hello </td>
-                                        <td class="center">
-                                            Chào
-                                        </td>
-                                        <td class="center"> Tạm biệt </td>
-                                        <td class="center">
-                                            {!! link_to('#', 'TRUE', ['class' => 'btn btn-success btn-xs', 'title' => 'Start Lesson']) !!}
-                                            {!! link_to('#', 'FALSE', ['class' => 'btn btn-danger btn-xs', 'title' => 'Start Lesson']) !!}
-                                        </td>
-                                    </tr>
+                                    @foreach ($userLesson->result as $result)
+                                        <tr class="odd gradeX @if ($result->is_correct) success @else danger @endif">
+                                            <td class="center"> {!! $result->word->content !!} </td>
+                                            <td class="center"> @if ($result->answerMember) {!! $result->answerMember->content_answer !!}@endif   </td></td>
+                                            <td class="center"> {!! $result->correctAnswer->content_answer !!} </td>
+                                            <td class="center">
+                                                @if ($result->is_correct)
+                                                    {!! link_to('#', 'TRUE', ['class' => 'btn btn-success btn-xs', 'title' => 'Start Lesson']) !!}
+                                                @else
+                                                    {!! link_to('#', 'FALSE', ['class' => 'btn btn-danger btn-xs', 'title' => 'Start Lesson']) !!}
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
-
-                        <!-- /.table-responsive -->
-                        <!-- /.panel-body -->
-
                     </div>
                     <!-- /.panel -->
                 </div>
 
-                <!-- pagination -->
-                <div class="row pull-right page-padding">
-                    {!! $lessons->links() !!}
-                </div>
                 <!-- /.col-lg-12 -->
             </div>
         </div>

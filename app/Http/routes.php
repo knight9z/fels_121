@@ -82,5 +82,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('category', 'ClientsController@category');
 
         Route::get('lesson/{category_id}', 'ClientsController@lesson');
+
+        Route::resource('/start/lesson', 'UserLessonsController', ['only' => ['store', 'update', 'edit', 'show']]);
     });
 });
