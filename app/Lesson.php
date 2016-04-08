@@ -44,6 +44,8 @@ class Lesson extends Common
      */
     protected $updateFields = ['category_id'];
 
+    protected $filterFields = ['category_id'];
+
     public function words()
     {
         return $this->hasMany(LessonWord::class);
@@ -91,9 +93,10 @@ class Lesson extends Common
      */
     public function getAllWithPage($filter = [], $fields = ['*'], $perPage = 15)
     {
+
         $lessons = parent::getAllWithPage($filter, $fields, $perPage);
+
         foreach ($lessons as $lesson){
-            $lesson->category;
             $lesson->count_words = $lesson->words->count();
         }
 
