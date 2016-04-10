@@ -1,0 +1,295 @@
+/*
+SQLyog Ultimate v11.11 (64 bit)
+MySQL - 5.6.25 : Database - elearning
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*Table structure for table `activities` */
+
+DROP TABLE IF EXISTS `activities`;
+
+CREATE TABLE `activities` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL,
+  `user_lesson_id` int(10) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `activities` */
+
+insert  into `activities`(`id`,`user_id`,`user_lesson_id`,`created_at`,`updated_at`,`deleted_at`) values (1,2,1,'2016-04-10 17:13:17','2016-04-10 17:13:17',NULL);
+
+/*Table structure for table `categories` */
+
+DROP TABLE IF EXISTS `categories`;
+
+CREATE TABLE `categories` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `image` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `categories` */
+
+insert  into `categories`(`id`,`image`,`created_at`,`updated_at`,`deleted_at`) values (1,'category_1460307205.jpg','2016-04-10 16:53:25','2016-04-10 16:53:25',NULL);
+
+/*Table structure for table `category_locales` */
+
+DROP TABLE IF EXISTS `category_locales`;
+
+CREATE TABLE `category_locales` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `language_id` int(10) unsigned NOT NULL,
+  `category_id` int(10) unsigned NOT NULL,
+  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'No data in this language',
+  `summary` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'No data in this language',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `category_locales` */
+
+insert  into `category_locales`(`id`,`language_id`,`category_id`,`title`,`summary`,`created_at`,`updated_at`,`deleted_at`) values (1,5,1,'Basic One','Humman','2016-04-10 16:53:25','2016-04-10 16:53:25',NULL),(2,1,1,'Basic 1','','2016-04-10 16:55:08','2016-04-10 16:55:08',NULL);
+
+/*Table structure for table `languages` */
+
+DROP TABLE IF EXISTS `languages`;
+
+CREATE TABLE `languages` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `iso_code` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `languages` */
+
+insert  into `languages`(`id`,`name`,`iso_code`,`created_at`,`updated_at`,`deleted_at`) values (1,'English','en','2016-03-17 11:00:00','2016-03-17 11:00:00',NULL),(2,'French - Français','fr','2016-03-17 11:00:00','2016-03-17 11:00:00',NULL),(3,'Chinese (Simplified) - ‪简体中文','zh-cn','2016-03-17 11:00:00','2016-03-17 11:00:00',NULL),(4,'Japanese - 日本語','ja','2016-03-17 11:00:00','2016-03-17 11:00:00',NULL),(5,'Vietnamese - Tiếng Việt','vi','2016-03-17 11:00:00','2016-03-17 11:00:00',NULL),(6,'Korean - 한국어','ko','2016-03-17 11:00:00','2016-03-17 11:00:00',NULL),(7,'Spanish - Español','es','2016-03-17 11:00:00','2016-03-17 11:00:00',NULL),(8,'Thai - ‪ภาษาไทย','th','2016-03-17 11:00:00','2016-03-17 11:00:00',NULL);
+
+/*Table structure for table `lesson_locales` */
+
+DROP TABLE IF EXISTS `lesson_locales`;
+
+CREATE TABLE `lesson_locales` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `language_id` int(10) unsigned NOT NULL,
+  `lesson_id` int(10) unsigned NOT NULL,
+  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'No data in this language',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `lesson_locales` */
+
+insert  into `lesson_locales`(`id`,`language_id`,`lesson_id`,`title`,`created_at`,`updated_at`,`deleted_at`) values (1,5,1,'Lesson 1','2016-04-10 16:54:04','2016-04-10 16:54:04',NULL),(2,1,1,'Lesson 1','2016-04-10 16:54:29','2016-04-10 16:54:29',NULL);
+
+/*Table structure for table `lesson_word` */
+
+DROP TABLE IF EXISTS `lesson_word`;
+
+CREATE TABLE `lesson_word` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `lesson_id` int(10) unsigned NOT NULL,
+  `word_id` int(10) unsigned NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `lesson_word` */
+
+insert  into `lesson_word`(`id`,`lesson_id`,`word_id`,`deleted_at`,`created_at`,`updated_at`) values (1,1,10,NULL,'2016-04-10 17:08:40','2016-04-10 17:08:40'),(2,1,9,NULL,'2016-04-10 17:08:40','2016-04-10 17:08:40'),(3,1,8,NULL,'2016-04-10 17:08:40','2016-04-10 17:08:40'),(4,1,7,NULL,'2016-04-10 17:08:40','2016-04-10 17:08:40'),(5,1,5,NULL,'2016-04-10 17:09:27','2016-04-10 17:09:27'),(6,1,4,NULL,'2016-04-10 17:09:27','2016-04-10 17:09:27'),(7,1,3,NULL,'2016-04-10 17:09:27','2016-04-10 17:09:27'),(8,1,2,NULL,'2016-04-10 17:09:27','2016-04-10 17:09:27'),(9,1,1,NULL,'2016-04-10 17:09:27','2016-04-10 17:09:27');
+
+/*Table structure for table `lessons` */
+
+DROP TABLE IF EXISTS `lessons`;
+
+CREATE TABLE `lessons` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `category_id` int(10) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `lessons` */
+
+insert  into `lessons`(`id`,`category_id`,`created_at`,`updated_at`,`deleted_at`) values (1,1,'2016-04-10 16:54:04','2016-04-10 16:54:04',NULL);
+
+/*Table structure for table `migrations` */
+
+DROP TABLE IF EXISTS `migrations`;
+
+CREATE TABLE `migrations` (
+  `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `migrations` */
+
+insert  into `migrations`(`migration`,`batch`) values ('2016_03_16_014745_create_categories_table',1),('2016_03_16_014745_create_category_locales_table',1),('2016_03_16_014745_create_languages_table',1),('2016_03_16_014745_create_lesson_locales_table',1),('2016_03_16_014745_create_lesson_words_table',1),('2016_03_16_014745_create_lessons_table',1),('2016_03_16_014745_create_relationships_table',1),('2016_03_16_014745_create_user_lesson_result_table',1),('2016_03_16_014745_create_user_lessons_table',1),('2016_03_16_014745_create_users_table',1),('2016_03_16_014745_create_word_answer_locales_table',1),('2016_03_16_014745_create_word_answers_table',1),('2016_03_16_014745_create_words_table',1),('2016_03_16_014746_create_activities_table',1);
+
+/*Table structure for table `relationships` */
+
+DROP TABLE IF EXISTS `relationships`;
+
+CREATE TABLE `relationships` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `follower_id` int(10) unsigned NOT NULL,
+  `following_id` int(10) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `relationships` */
+
+insert  into `relationships`(`id`,`follower_id`,`following_id`,`created_at`,`updated_at`,`deleted_at`) values (1,3,2,'2016-04-10 17:18:14','2016-04-10 17:18:30','2016-04-10 17:18:30'),(2,3,2,'2016-04-10 17:18:32','2016-04-10 17:18:32',NULL);
+
+/*Table structure for table `user_lesson_result` */
+
+DROP TABLE IF EXISTS `user_lesson_result`;
+
+CREATE TABLE `user_lesson_result` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_lesson_id` int(10) unsigned NOT NULL,
+  `word_id` int(10) unsigned NOT NULL,
+  `word_answer_id` int(10) unsigned NOT NULL,
+  `word_answer_correct_id` int(10) unsigned NOT NULL,
+  `word_answer_wrong_id_1` int(10) unsigned NOT NULL,
+  `word_answer_wrong_id_2` int(10) unsigned NOT NULL,
+  `word_answer_wrong_id_3` int(10) unsigned NOT NULL,
+  `is_correct` tinyint(4) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `user_lesson_result` */
+
+insert  into `user_lesson_result`(`id`,`user_lesson_id`,`word_id`,`word_answer_id`,`word_answer_correct_id`,`word_answer_wrong_id_1`,`word_answer_wrong_id_2`,`word_answer_wrong_id_3`,`is_correct`,`created_at`,`updated_at`,`deleted_at`) values (1,1,10,0,10,5,7,2,0,'2016-04-10 17:12:59','2016-04-10 17:12:59',NULL),(2,1,9,9,9,8,7,6,1,'2016-04-10 17:12:59','2016-04-10 17:13:17',NULL),(3,1,8,5,8,9,5,10,0,'2016-04-10 17:12:59','2016-04-10 17:13:17',NULL),(4,1,7,7,7,6,10,8,1,'2016-04-10 17:12:59','2016-04-10 17:13:17',NULL),(5,1,5,5,5,8,10,1,1,'2016-04-10 17:12:59','2016-04-10 17:13:17',NULL),(6,1,4,3,4,3,1,7,0,'2016-04-10 17:12:59','2016-04-10 17:13:17',NULL),(7,1,3,3,3,5,8,1,1,'2016-04-10 17:12:59','2016-04-10 17:13:17',NULL),(8,1,2,9,2,9,7,8,0,'2016-04-10 17:12:59','2016-04-10 17:13:17',NULL),(9,1,1,1,1,7,4,3,1,'2016-04-10 17:12:59','2016-04-10 17:13:17',NULL);
+
+/*Table structure for table `user_lessons` */
+
+DROP TABLE IF EXISTS `user_lessons`;
+
+CREATE TABLE `user_lessons` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL,
+  `lesson_id` int(10) unsigned NOT NULL,
+  `total_correct` smallint(6) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `user_lessons` */
+
+insert  into `user_lessons`(`id`,`user_id`,`lesson_id`,`total_correct`,`created_at`,`updated_at`,`deleted_at`) values (1,2,1,5,'2016-04-10 17:12:59','2016-04-10 17:13:17',NULL);
+
+/*Table structure for table `users` */
+
+DROP TABLE IF EXISTS `users`;
+
+CREATE TABLE `users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `avatar` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `role` tinyint(4) NOT NULL,
+  `percent_skill` smallint(6) NOT NULL DEFAULT '0',
+  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `users` */
+
+insert  into `users`(`id`,`name`,`password`,`email`,`avatar`,`role`,`percent_skill`,`remember_token`,`created_at`,`updated_at`,`deleted_at`) values (1,'admin','$2y$10$E2nTY6RwlJoZsrZ3dfzE.uNY61qACG1vbwJr25EqJ7rAM8LEj8w1W','admin@gmail.com','',1,0,NULL,NULL,NULL,NULL),(2,'Nguyen Anh 3','$2y$10$K2XVLqg6freargeZoB6/y.7zNOjkE5b9j2FVg6i.PJwhInKhZ2ILS','nv3anh@gmail.com','user_1460308314.jpg',2,0,'AwfnJ2CrIIfD3rqB0TJz5u6zDT8zrpPerUsTA36ERXIiqpAB6tDfPkrSnmOF','2016-04-10 17:11:54','2016-04-10 17:17:06',NULL),(3,'Nguyen Anh','$2y$10$9qm/sm7ZPl5.QDBbLyz/P..jOeEhhP4I60584jwblyfCT09ugiFxG','nv2anh@gmail.com','user_1460308651.jpg',2,0,NULL,'2016-04-10 17:17:31','2016-04-10 17:17:31',NULL);
+
+/*Table structure for table `word_answer_locales` */
+
+DROP TABLE IF EXISTS `word_answer_locales`;
+
+CREATE TABLE `word_answer_locales` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `language_id` int(10) unsigned NOT NULL,
+  `word_answer_id` int(10) unsigned NOT NULL,
+  `content_answer` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'No data in this language',
+  `note_answer` text COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `word_answer_locales` */
+
+insert  into `word_answer_locales`(`id`,`language_id`,`word_answer_id`,`content_answer`,`note_answer`,`created_at`,`updated_at`,`deleted_at`) values (1,1,1,'Man','','2016-04-10 16:56:55','2016-04-10 16:56:55',NULL),(2,1,2,'womman','','2016-04-10 16:57:28','2016-04-10 16:57:28',NULL),(3,1,3,'He','','2016-04-10 16:58:05','2016-04-10 16:58:05',NULL),(4,1,4,'She','','2016-04-10 16:58:57','2016-04-10 16:58:57',NULL),(5,5,4,'Cô ấy','','2016-04-10 16:59:17','2016-04-10 16:59:17',NULL),(6,5,3,'Anh ấy','','2016-04-10 16:59:26','2016-04-10 16:59:26',NULL),(7,5,2,'Phụ nữ','','2016-04-10 16:59:39','2016-04-10 16:59:39',NULL),(8,5,1,'Đàn ông','','2016-04-10 16:59:49','2016-04-10 16:59:49',NULL),(9,1,5,'I','','2016-04-10 17:00:36','2016-04-10 17:00:36',NULL),(10,1,6,'You','','2016-04-10 17:01:11','2016-04-10 17:01:11',NULL),(11,1,7,'Your','','2016-04-10 17:01:52','2016-04-10 17:01:52',NULL),(12,1,8,'mine','','2016-04-10 17:02:23','2016-04-10 17:02:38',NULL),(13,5,5,'Tôi','','2016-04-10 17:03:00','2016-04-10 17:03:00',NULL),(14,5,6,'Bạn','','2016-04-10 17:03:09','2016-04-10 17:03:09',NULL),(15,5,7,'Của bạn','','2016-04-10 17:03:18','2016-04-10 17:03:18',NULL),(16,5,8,'Của tôi','','2016-04-10 17:03:28','2016-04-10 17:03:28',NULL),(17,1,9,'Humman','','2016-04-10 17:05:06','2016-04-10 17:05:06',NULL),(18,1,10,'animal','','2016-04-10 17:05:25','2016-04-10 17:05:25',NULL),(19,5,10,'Động vật','','2016-04-10 17:10:23','2016-04-10 17:10:23',NULL),(20,5,9,'Con người','','2016-04-10 17:10:35','2016-04-10 17:10:35',NULL);
+
+/*Table structure for table `word_answers` */
+
+DROP TABLE IF EXISTS `word_answers`;
+
+CREATE TABLE `word_answers` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `word_id` int(10) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `word_answers` */
+
+insert  into `word_answers`(`id`,`word_id`,`created_at`,`updated_at`,`deleted_at`) values (1,1,'2016-04-10 16:56:55','2016-04-10 16:56:55',NULL),(2,2,'2016-04-10 16:57:28','2016-04-10 16:57:28',NULL),(3,3,'2016-04-10 16:58:05','2016-04-10 16:58:05',NULL),(4,4,'2016-04-10 16:58:57','2016-04-10 16:58:57',NULL),(5,5,'2016-04-10 17:00:36','2016-04-10 17:00:36',NULL),(6,6,'2016-04-10 17:01:11','2016-04-10 17:01:11',NULL),(7,7,'2016-04-10 17:01:52','2016-04-10 17:01:52',NULL),(8,8,'2016-04-10 17:02:23','2016-04-10 17:02:23',NULL),(9,9,'2016-04-10 17:05:06','2016-04-10 17:05:06',NULL),(10,10,'2016-04-10 17:05:25','2016-04-10 17:05:25',NULL);
+
+/*Table structure for table `words` */
+
+DROP TABLE IF EXISTS `words`;
+
+CREATE TABLE `words` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `category_id` int(10) unsigned NOT NULL,
+  `content` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `words` */
+
+insert  into `words`(`id`,`category_id`,`content`,`created_at`,`updated_at`,`deleted_at`) values (1,1,'男','2016-04-10 16:56:55','2016-04-10 16:56:55',NULL),(2,1,'女','2016-04-10 16:57:28','2016-04-10 16:57:28',NULL),(3,1,'彼','2016-04-10 16:58:05','2016-04-10 16:58:05',NULL),(4,1,' 彼女','2016-04-10 16:58:57','2016-04-10 16:58:57',NULL),(5,1,'私','2016-04-10 17:00:36','2016-04-10 17:00:36',NULL),(6,1,'君は','2016-04-10 17:01:11','2016-04-10 17:01:11',NULL),(7,1,'きみの','2016-04-10 17:01:52','2016-04-10 17:01:52',NULL),(8,1,'鉱山','2016-04-10 17:02:23','2016-04-10 17:02:38',NULL),(9,1,'人間','2016-04-10 17:05:06','2016-04-10 17:05:06',NULL),(10,1,'動物','2016-04-10 17:05:25','2016-04-10 17:05:25',NULL);
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
