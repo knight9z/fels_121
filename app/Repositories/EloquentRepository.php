@@ -136,4 +136,9 @@ class EloquentRepository
         }
     }
 
+
+    public function countRecord($filter = [])
+    {
+        return $this->model->countRecord($filter);
+    }
 }

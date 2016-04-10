@@ -301,6 +301,9 @@ class Common extends Model
         }
     }
 
-
-
+    public function countRecord($filter)
+    {
+        $query = $this->_queryBuild(['*'], $filter);
+        return $query->count();
+    }
 }

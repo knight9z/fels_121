@@ -21,14 +21,14 @@
                                     <i class="fa fa-book fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
-                                    <div>Category</div>
+                                    <div class="huge">{!! $statistic['category'] !!}</div>
+                                    <div>{!! trans('backend/layout.category') !!}</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="category">
                             <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
+                                <span class="pull-left">{!! trans('backend/layout.detail') !!}</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>
@@ -46,14 +46,14 @@
                                     <i class="fa fa-comments fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">124</div>
-                                    <div>Word</div>
+                                    <div class="huge">{!! $statistic['word'] !!}</div>
+                                    <div>{!! trans('backend/layout.word') !!}</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="   word">
                             <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
+                                <span class="pull-left">{!! trans('backend/layout.detail') !!}</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>

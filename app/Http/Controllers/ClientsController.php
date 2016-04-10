@@ -53,9 +53,13 @@ class ClientsController extends CommonsController
         $listFollowingId = $this->relationShipRepository->getListUser($filterRelationship);
         $filterActivity = ['user_id' => $currentUser->id, 'following_id' => $listFollowingId];
         $activities = $this->activityRepository->getAllWithPage($filterActivity);
+        $statistic = [
+            'word' => $this->wordRepository->countRecord([]),
+            'category' => $this->categoryRepository->countRecord([])
+        ];
 
 
-        return $this->_renderView('index', compact('currentUser', 'activities'));
+        return $this->_renderView('index', compact('currentUser', 'activities', 'statistic'));
     }
 
     public function category()

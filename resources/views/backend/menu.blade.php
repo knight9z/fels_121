@@ -32,6 +32,30 @@
     </ul>
     <!-- /Top_menu -->
 
+    <!-- Language_menu -->
+    <ul class="nav navbar-top-links navbar-right">
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" title="{!! trans('layout.menu.language') !!}">
+                <i class="fa fa-language"></i>  <i class="fa fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+                @foreach ($languages as $language)
+                    <li>
+                        <a href="/change-lang/{!! $language['iso_code'] !!}">
+                            @if ($language['is_current_lang'])
+                                <i class="fa fa-check"></i>
+                            @endif
+                            {!! trans('layout.menu.lang.' . $language['iso_code']) !!}
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+            <!-- /.dropdown-user -->
+        </li>
+        <!-- /.dropdown -->
+    </ul>
+    <!-- /Language_menu -->
+
     <!-- Left_menu -->
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">

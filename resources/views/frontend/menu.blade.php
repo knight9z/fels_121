@@ -8,7 +8,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">E-Learning</a>
+        <a class="navbar-brand" href="/">{!! trans('layout.title') !!}</a>
     </div>
     <!-- /.navbar-header -->
 
@@ -56,6 +56,29 @@
         <!-- /.dropdown -->
     </ul>
 
+    <!-- Language_menu -->
+    <ul class="nav navbar-top-links navbar-right">
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" title="{!! trans('layout.menu.language') !!}">
+                <i class="fa fa-language"></i>  <i class="fa fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+                @foreach ($languages as $language)
+                    <li>
+                        <a href="/change-lang/{!! $language['iso_code'] !!}">
+                            @if ($language['is_current_lang'])
+                                <i class="fa fa-check"></i>
+                            @endif
+                            {!! trans('layout.menu.lang.' . $language['iso_code']) !!}
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+            <!-- /.dropdown-user -->
+        </li>
+        <!-- /.dropdown -->
+    </ul>
+    <!-- /Language_menu -->
 
     @include('frontend.user')
 

@@ -8,4 +8,5 @@ interface CategoryRepositoryInterface {
     public function createItem($rawData);
     public function deleteItem($id);
     public function getList($filter, $fields);
+    public function countRecord($filter = []);
 }

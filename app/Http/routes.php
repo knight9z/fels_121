@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return response()->redirectTo('/session/create');
 });
 
 Route::get('change-lang/{iso_code}', 'CommonsController@setLanguage');

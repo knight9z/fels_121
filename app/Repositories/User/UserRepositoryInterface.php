@@ -10,4 +10,5 @@ interface UserRepositoryInterface
     public function deleteItem ($id);
     public function isAdmin();
     public function isUser();
+    public function countRecord($filter = []);
 }

@@ -162,4 +162,11 @@ class User extends Authenticatable
         }
     }
 
+
+    public function countRecord($filter)
+    {
+        $query = $this->_queryBuild(['*'], $filter);
+        return $query->count();
+    }
+
 }
