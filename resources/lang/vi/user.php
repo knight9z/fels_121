@@ -54,7 +54,9 @@ return [
 
         'compare_password' => 'Nhấp lại mật khẩu không đúng',
         'register_failed' => 'Có lỗi vui lòng thử lại.',
-
     ],
+    'destroy' => [
+        'remove_mine' => 'Bạn không thể tự xóa bản thân mình '
+    ]
 
 ];

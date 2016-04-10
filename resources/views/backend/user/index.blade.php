@@ -18,12 +18,12 @@
                             <table class="table table-striped  table-hover" >
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Image</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Role</th>
-                                    <th>Action</th>
+                                    <th>{!! trans('backend/user/index.table.id') !!}</th>
+                                    <th>{!! trans('backend/user/index.table.image') !!}</th>
+                                    <th>{!! trans('backend/user/index.table.name') !!}</th>
+                                    <th>{!! trans('backend/user/index.table.email') !!}</th>
+                                    <th>{!! trans('backend/user/index.table.role') !!}</th>
+                                    <th>{!! trans('backend/user/index.table.action') !!}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

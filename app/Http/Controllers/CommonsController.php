@@ -70,7 +70,7 @@ class CommonsController extends Controller
         $listLang = App\Language::lists('iso_code');
         $isoCode = $listLang->contains($isoCode) ? $isoCode : 'vi';
         $cookie = Cookie::forever('lang', $isoCode);
-        
+
         return back()->withCookie($cookie);
     }
 
