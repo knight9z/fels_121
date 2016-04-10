@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MemberCreateRequest;
+use App\Http\Requests\MemberUpdateRequest;
 use App\Repositories\Relationship\RelationshipRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
 use App\User;
