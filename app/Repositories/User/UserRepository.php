@@ -5,6 +5,7 @@ use App\User;
 use App\Repositories\EloquentRepository;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
 
 class UserRepository extends EloquentRepository implements UserRepositoryInterface
 {
@@ -72,6 +73,9 @@ class UserRepository extends EloquentRepository implements UserRepositoryInterfa
             }
 
             $rawData['password'] = Hash::make($rawData['password']);
+        } else {
+            unset($rawData['password']);
+
         }
 
         if(!empty(Input::file('image'))){

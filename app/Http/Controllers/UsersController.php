@@ -58,7 +58,7 @@ class UsersController extends CommonsController
         $rawData = $request->all();
         $responseFromRepository = $this->userRepository->createItem($rawData);
         if($responseFromRepository['error']){
-            return $this->_redirectWithAction('UsersController@create', $rawData, [$responseFromRepository['message']]);
+            return $this->_redirectWithAction('UsersController', 'create', $rawData, [$responseFromRepository['message']]);
 
         } else {
             return $this->_redirectWithAction('UsersController','index');
@@ -101,7 +101,7 @@ class UsersController extends CommonsController
         $rawData = $request->all();
         $responseFromRepository = $this->userRepository->updateItem($id, $rawData);
         if($responseFromRepository['error']){
-            return $this->_redirectWithAction('UsersController@create', $rawData, [$responseFromRepository['message']]);
+            return back()->withErrors([$responseFromRepository['message']])->withInput($rawData);
 
         } else {
             return $this->_redirectWithAction('UsersController','index');
