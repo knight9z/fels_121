@@ -63,10 +63,6 @@
         }
     });
 </script>
-
 <!-- Custom Theme JavaScript -->
 {!! Html::script('common/bower_components/jquery-tokeninput/src/jquery.tokeninput.js') !!}
-
-@include('layouts.token_input_js')
-
 </html>

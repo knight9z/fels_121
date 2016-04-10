@@ -23,7 +23,7 @@
                                     <fieldset>
                                         <div class="form-group">
                                             <label>{!!  trans('backend/lesson_word.create.title') !!}</label>
-                                            {!! Form::text('word_id', old('word_id'), array('class' => 'form-control', 'id' => 'word_id')) !!}
+                                            {!! Form::text('word_id', old('word_id'), array('class' => 'form-control', 'id' => 'word_id', 'data-lesson-id' => $lessonId)) !!}
                                         </div>
 
                                         @include('layouts.errors_detail', ['fieldError' => 'word_id'])

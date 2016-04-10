@@ -130,9 +130,8 @@ class WordsController extends CommonsController
     public function searchByLesson($lessonId)
     {
         $wordKeySearch = Input::get('q');
-
         $responseFromRepository = $this->wordRepository->searchByLesson($lessonId, $wordKeySearch);
 
-        echo json_encode($responseFromRepository);
+        return response()->json($responseFromRepository);
     }
 }
