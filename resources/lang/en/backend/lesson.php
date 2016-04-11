@@ -17,8 +17,11 @@ return [
         'title' => 'Title',
         'action' => 'Action',
         'category' => 'Category',
-        'image' => 'Image'
+        'image' => 'Image',
+        'total_word' => 'Total Word',
+        'list_word' => 'Total Word',
     ],
     'title_header' => 'Lesson',
+    'button_add' => 'Add',
 
 ];

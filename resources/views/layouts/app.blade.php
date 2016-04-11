@@ -21,6 +21,9 @@
     <!-- Custom Fonts -->
     {!! Html::style('common/bower_components/font-awesome/css/font-awesome.min.css') !!}
 
+    <!-- token-input  -->
+    {!! Html::style('common/bower_components/jquery-tokeninput/styles/token-input.css') !!}
+
 </head>
 
 <body>
@@ -38,11 +41,9 @@
 <!-- Metis Menu Plugin JavaScript -->
 {!! Html::script('common/bower_components/metisMenu/dist/metisMenu.min.js') !!}
 
-<!-- Morris Charts JavaScript -->
-{!! Html::script('common/bower_components/raphael/raphael-min.js') !!}
-{!! Html::script('common/bower_components/morrisjs/morris.min.js') !!}
-
 <!-- Custom Theme JavaScript -->
 {!! Html::script('common/dist/js/sb-admin-2.js') !!}
 
+<!-- Custom tokeninput JavaScript -->
+{!! Html::script('common/bower_components/jquery-tokeninput/src/jquery.tokeninput.js') !!}
 </html>
