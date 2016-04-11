@@ -19,5 +19,6 @@ return [
             'learned' => 'Learned',
             'not_learned' => 'Not Learned',
         ],
+        'lesson_word' => 'You can reply question'
     ]
 ];

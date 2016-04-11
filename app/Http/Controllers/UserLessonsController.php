@@ -98,22 +98,27 @@ class UserLessonsController extends CommonsController
         $rawData = $request->all();
         $result = [];
 
-        foreach ($rawData['result'] as $userLessonResultId => $wordAnswerId ) {
-            $result[] = [
-                'id' => $userLessonResultId,
-                'word_answer_id' => $wordAnswerId,
-            ];
-        }
+        if (isset($rawData['result'])) {
+            foreach ($rawData['result'] as $userLessonResultId => $wordAnswerId) {
+                $result[] = [
+                    'id' => $userLessonResultId,
+                    'word_answer_id' => $wordAnswerId,
+                ];
+            }
 
-        $rawData['user_lesson_result'] = $result;
+            $rawData['user_lesson_result'] = $result;
 
-        $responseFromRepository = $this->userLessonRepository->updateItem($id, $rawData);
+            $responseFromRepository = $this->userLessonRepository->updateItem($id, $rawData);
 
-        if ($responseFromRepository['error']){
-            return back()->withErrors[$responseFromRepository['message']];
+            if ($responseFromRepository['error']) {
+                return back()->withErrors[$responseFromRepository['message']];
 
+            } else {
+                return $this->_redirectPage('/client/start/lesson/' . $responseFromRepository['data']->id);
+
+            }
         } else {
-            return $this->_redirectPage('/client/start/lesson/'. $responseFromRepository['data']->id);
+            return back()->withErrors([trans('frontend/layout.child.lesson_word')]);
 
         }
     }

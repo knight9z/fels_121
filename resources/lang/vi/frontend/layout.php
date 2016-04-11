@@ -19,5 +19,6 @@ return [
             'learned' => 'Đã học',
             'not_learned' => 'Chưa học',
         ],
+        'lesson_word' => 'Bạn cần trả lời câu hỏi'
     ]
 ];
