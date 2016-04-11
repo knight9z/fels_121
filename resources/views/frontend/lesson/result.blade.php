@@ -29,8 +29,8 @@
                                     @foreach ($userLesson->result as $result)
                                         <tr class="odd gradeX @if ($result->is_correct) success @else danger @endif">
                                             <td class="center"> {!! $result->word->content !!} </td>
-                                            <td class="center"> @if ($result->answerMember) {!! $result->answerMember->content_answer !!}@endif   </td></td>
-                                            <td class="center"> {!! $result->correctAnswer->content_answer !!} </td>
+                                            <td class="center"> @if ($result->answerMember) {!! $result->answerMember->locale['content_answer'] !!}@endif   </td></td>
+                                            <td class="center"> {!! $result->correctAnswer->locale['content_answer'] !!} </td>
                                             <td class="center">
                                                 @if ($result->is_correct)
                                                     {!! link_to('#', 'TRUE', ['class' => 'btn btn-success btn-xs', 'title' => 'Start Lesson']) !!}

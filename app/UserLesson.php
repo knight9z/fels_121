@@ -83,7 +83,4 @@ class UserLesson extends Common
             throw $e;
         }
     }
-
-
-
 }

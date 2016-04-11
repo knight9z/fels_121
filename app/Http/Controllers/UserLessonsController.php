@@ -70,7 +70,6 @@ class UserLessonsController extends CommonsController
     {
         $currentUser = Auth::user();
         $userLesson = $this->userLessonRepository->getDetail($id);
-       // echo json_encode($userLesson->result[0]->answerMember);die;
         return $this->_renderView('result', compact('currentUser', 'userLesson'));
     }
 

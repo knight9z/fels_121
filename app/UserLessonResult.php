@@ -47,27 +47,27 @@ class UserLessonResult extends Common
 
     public function wrongAnswer1()
     {
-        return $this->hasOne(WordAnswerLocale::class, 'word_answer_id', 'word_answer_wrong_id_1');
+        return $this->belongsTo(WordAnswer::class, 'word_answer_wrong_id_1');
     }
 
     public function wrongAnswer2()
     {
-        return $this->hasOne(WordAnswerLocale::class, 'word_answer_id', 'word_answer_wrong_id_2');
+        return $this->belongsTo(WordAnswer::class, 'word_answer_wrong_id_2');
     }
 
     public function wrongAnswer3()
     {
-        return $this->hasOne(WordAnswerLocale::class, 'word_answer_id', 'word_answer_wrong_id_3');
+        return $this->belongsTo(WordAnswer::class, 'word_answer_wrong_id_3');
     }
 
     public function answerMember()
     {
-        return $this->hasOne(WordAnswerLocale::class, 'word_answer_id', 'word_answer_id');
+        return $this->belongsTo(WordAnswer::class, 'word_answer_id');
     }
 
     public function correctAnswer()
     {
-        return $this->hasOne(WordAnswerLocale::class, 'word_answer_id', 'word_answer_correct_id');
+        return $this->belongsTo(WordAnswer::class, 'word_answer_correct_id');
     }
 
     public function word()
@@ -124,6 +124,4 @@ class UserLessonResult extends Common
 
         }
     }
-
-
 }

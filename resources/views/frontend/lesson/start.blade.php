@@ -34,28 +34,28 @@
                                                             <input type="radio" value="{!! $question->word_answer_wrong_id_1 !!}" name="result[{!! $question->id !!}]" id="result_{!! $question->id !!}">
 
                                                         </div>
-                                                        {!! $question->wrongAnswer1->content_answer !!}
+                                                        {!! $question->wrongAnswer1->locale['content_answer'] !!}
                                                     </div>
 
                                                     <div class="row">
                                                         <div class="col-md-1">
                                                             <input type="radio" value="{!! $question->word_answer_wrong_id_2 !!}" name="result[{!! $question->id !!}]" id="result_{!! $question->id !!}">
                                                         </div>
-                                                        {!! $question->wrongAnswer2->content_answer !!}
+                                                        {!! $question->wrongAnswer2->locale['content_answer'] !!}
                                                     </div>
 
                                                     <div class="row">
                                                         <div class="col-md-1">
                                                             <input type="radio" value="{!! $question->word_answer_wrong_id_3 !!}" name="result[{!! $question->id !!}]" id="result_{!! $question->id !!}">
                                                         </div>
-                                                        {!! $question->wrongAnswer3->content_answer !!}
+                                                        {!! $question->wrongAnswer3->locale['content_answer'] !!}
                                                     </div>
 
                                                     <div class="row">
                                                         <div class="col-md-1">
                                                             <input type="radio" value="{!! $question->word_answer_correct_id !!}" name="result[{!! $question->id !!}]" id="result_{!! $question->id !!}">
                                                         </div>
-                                                        {!! $question->correctAnswer->content_answer !!}
+                                                        {!! $question->correctAnswer->locale['content_answer'] !!}
                                                     </div>
 
                                                 </li>
