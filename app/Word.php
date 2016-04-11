@@ -3,6 +3,8 @@
 namespace App;
 
 use Exception;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class Word extends Common
 {
@@ -25,6 +27,13 @@ class Word extends Common
      * @var array
      */
     protected $updateFields = ['category_id', 'content'];
+
+    /**
+     * allowed filter field
+     *
+     * @var array
+     */
+    protected $filterFields = ['category_id', 'content'];
 
     /**
      * relation with table answer
@@ -77,7 +86,6 @@ class Word extends Common
             //extend function
             $object = parent::createItem($rawData);
             $rawData['word_id'] = $object->id;
-
             //create answer
             $wordAnswer = new WordAnswer();
             $object->answer = $wordAnswer->createItem($rawData);
@@ -129,10 +137,20 @@ class Word extends Common
             $answerLocale = WordAnswerLocale::where('word_answer_id', $wordAnswer->id)->delete();
 
             return $object;
-
         } catch (Exception $e) {
             throw $e;
         }
+    }
+
+
+    public function searchByCategory($categoryId, $wordKeySearch)
+    {
+        $fields = ['id', 'content as name'];
+        $filter = ['category_id' => $categoryId ];
+        $likeFilter = ['content' => '%'. $wordKeySearch . '%'];
+        $query = $this->_queryBuild($fields, $filter, $likeFilter);
+
+        return $query->get();
     }
 }
 

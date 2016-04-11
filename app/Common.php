@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use  App\CommonLocale;
+use Illuminate\Support\Facades\Log;
 
 class Common extends Model
 {
@@ -65,14 +66,17 @@ class Common extends Model
      * @param string $orderBy
      * @return mixed
      */
-    protected function _queryBuild($fields = ['*'], $filter = [], $orderBy = 'id')
+    protected function _queryBuild($fields = ['*'], $filter = [], $likeFilter = [], $orderBy = 'id')
     {
         $query = $this::select($fields);
 
         foreach ($this->filterFields as $field) {
             if (isset($filter[$field])) {
                 $query = $query->where($field, $filter[$field]);
+            }
 
+            if (isset($likeFilter[$field])) {
+                $query = $query->where($field, 'LIKE', $likeFilter[$field]);
             }
         }
 

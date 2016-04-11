@@ -20,6 +20,7 @@ return [
         'image_mimes' => 'Images must be of the form jpeg,png',
         'category_id_exists' => 'Category is do not exist',
         'category_id_require' => 'Category is require',
+        'word_id_require' => 'Word is require',
     ],
 
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',

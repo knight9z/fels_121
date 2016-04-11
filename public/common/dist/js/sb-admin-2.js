@@ -34,3 +34,14 @@ $(function() {
         element.addClass('active');
     }
 });
+
+$(function() {
+   var word = document.getElementById('word_id');
+    if ( word != null) {
+        $(document).ready(function () {
+            $("#word_id").tokenInput("/word/search/" + word.dataset.lessonId, {
+                tokenLimit: 10,
+            });
+        });
+    }
+});
