@@ -51,8 +51,7 @@ class SessionsController extends CommonsController
             return $this->_redirectWithAction('ClientsController', 'index');
         }
 
-        return redirect()->$this->_redirectWithAction('SessionsController', 'create', $request->all(), [trans('user.login.login_failed')]);
-
+        return $this->_redirectWithAction('SessionsController', 'create', $request->all(), [trans('user.login.login_failed')]);
     }
 
     /**

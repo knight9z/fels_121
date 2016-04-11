@@ -21,6 +21,8 @@ class CommonsController extends Controller
      */
     protected $viewFolder;
 
+    protected $currentUser;
+
     /**
      * CommonsController constructor.
      */
@@ -31,6 +33,7 @@ class CommonsController extends Controller
         $lang = isset($_COOKIE['lang']) ? $_COOKIE['lang'] : config('constants.default_language');
         App::setLocale($lang);
         //ToDo : we will set $viewFolder in child classes
+        $this->currentUser = Auth::user();
     }
 
     /**

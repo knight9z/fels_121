@@ -2,9 +2,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MemberCreateRequest;
+use App\Http\Requests\MemberUpdateRequest;
 use App\Repositories\User\UserRepositoryInterface;
-use Illuminate\Http\Request;
+use App\User;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 
 class MembersController extends CommonsController
 {
@@ -32,7 +34,14 @@ class MembersController extends CommonsController
      */
     public function index()
     {
-        //
+        $currentUser = $this->currentUser;
+
+        $filter = [
+            'role' => User::USER_ROLE_MEMBER,
+        ];
+        $users = $this->userRepository->getAllWithPage($filter);
+
+        return $this->_renderView('index', compact('users', 'currentUser'));
     }
 
     /**
@@ -48,7 +57,7 @@ class MembersController extends CommonsController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  $request
      * @return \Illuminate\Http\Response
      */
     public function store(MemberCreateRequest $request)
@@ -71,7 +80,9 @@ class MembersController extends CommonsController
      */
     public function show($id)
     {
-        //
+        $currentUser = $this->currentUser;
+        $user = $this->userRepository->getDetail($id);
+        return $this->_renderView('detail', compact('user', 'currentUser'));
     }
 
     /**
@@ -82,29 +93,30 @@ class MembersController extends CommonsController
      */
     public function edit($id)
     {
-        //
+        $currentUser = $this->currentUser;
+        if ($currentUser->id != $id) {
+            return $this->_redirectWithAction('ClientsController', 'index');
+
+        }
+        $user = $this->userRepository->getDetail($id);
+        return $this->_renderView('edit', compact('user', 'currentUser'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param   $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MemberUpdateRequest $request, $id)
     {
-        //
-    }
+        $rawData = $request->all();
+        $responseFromRepository = $this->userRepository->updateItem($id, $rawData);
+        if ($responseFromRepository['error']) {
+            return back()->withErrors([$responseFromRepository['message']])->withInput($rawData);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        }
+        return $this->_redirectWithAction('ClientsController','index');
     }
 }
