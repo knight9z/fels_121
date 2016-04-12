@@ -39,7 +39,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('session/destroy', 'SessionsController@logOut');
 
     // Router of admin
-    Route::group(['prefix' => '/admin', 'middleware' => ['admin']], function () {
+    Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
         Route::get('dashboard', 'AdminsController@index');
 
         //manager of user
@@ -62,5 +62,13 @@ Route::group(['middleware' => ['web']], function () {
 
     //get json for word
     Route::get('word/search/{lesson_id}', 'WordsController@searchByLesson');
+
+    // Router of admin
+    Route::group(['prefix' => 'client', 'middleware' => ['member']], function () {
+        Route::get('dashboard', 'ClientsController@index');
+
+        //manager of user
+        Route::resource('member', 'MembersController', array('except' => ['destroy', 'create', 'store']));
+    });
 
 });

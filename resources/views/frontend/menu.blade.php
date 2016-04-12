@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">E-Learning</a>
+        <a class="navbar-brand" href="index.html">{!! trans('layout.title') !!}</a>
     </div>
     <!-- /.navbar-header -->
 
@@ -18,12 +18,12 @@
                 <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
-                <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                </li>
-                <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                <li>
+                    {!! link_to('client/member/' . $currentUser->id . '/edit', trans('frontend/layout.menu.setting')) !!}
                 </li>
                 <li class="divider"></li>
-                <li><a href="{!! url('session/destroy') !!}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                <li>
+                    <a href="{!! url('session/destroy') !!}"><i class="fa fa-sign-out fa-fw"></i> {!! trans('frontend/layout.menu.log_out') !!}</a>
                 </li>
             </ul>
             <!-- /.dropdown-user -->

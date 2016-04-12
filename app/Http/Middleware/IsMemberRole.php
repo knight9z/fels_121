@@ -15,7 +15,7 @@ class IsMemberRole
      */
     public function handle($request, Closure $next)
     {
-        if (!isset($request->user()->role) || $request->user()->isMember()) {
+        if (!isset($request->user()->role) || !$request->user()->isMember()) {
             return redirect()->action('SessionsController@create');
         }
 
